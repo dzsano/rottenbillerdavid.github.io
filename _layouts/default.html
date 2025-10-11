@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      color: #e0e0e0;
+      background-color: #111;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      height: 80vh;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .image-half {
+      width: 40%;
+      text-align: center;
+    }
+
+    .image-half img {
+      width: 80%;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Left image hover (house) */
+    .house:hover .old {
+      opacity: 0;
+    }
+    .house:hover .new {
+      opacity: 1;
+    }
+
+    /* Right image hover (brain) */
+    .brain:hover .sad {
+      opacity: 0;
+    }
+    .brain:hover .color {
+      opacity: 1;
+    }
+
+    /* Links in between */
+    .links {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+
+    .links a:hover {
+      color: #fff;
+    }
+
+    .hidden {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ site.title }}</h1>
+  <div class="container">
+    <div class="image-half house">
+      <img src="/assets/images/house-old.png" alt="Old House" class="old">
+      <img src="/assets/images/house-new.png" alt="New House" class="new hidden">
+    </div>
+
+    <div class="links">
+      <a href="#">Story One</a>
+      <a href="#">Story Two</a>
+      <a href="#">Story Three</a>
+      <a href="#">Story Four</a>
+    </div>
+
+    <div class="image-half brain">
+      <img src="/assets/images/brain-sad.png" alt="Sad Brain" class="sad">
+      <img src="/assets/images/brain-color1.png" alt="Color Brain" class="color hidden">
+    </div>
+  </div>
+</body>
+</html>
 
