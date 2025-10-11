@@ -3,7 +3,7 @@ layout: story
 title: Human Project 
 ---
 
-# Human Project
+
 
 This will be a placeholder for the human project for now.
 
