@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: story
 title: Cat Project 
 ---
 
