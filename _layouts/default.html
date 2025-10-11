@@ -17,6 +17,10 @@
       flex-direction: column;
     }
 
+    h1 {
+      margin-bottom: 2rem;
+    }
+
     .container {
       display: flex;
       width: 100%;
@@ -26,38 +30,50 @@
     }
 
     .image-half {
+      position: relative;
       width: 40%;
       text-align: center;
     }
 
     .image-half img {
       width: 80%;
+      max-width: 400px;
+      height: auto;
       transition: opacity 0.5s ease;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
-    /* Left image hover (house) */
-    .house:hover .old {
+    /* Hide the alternate (happy) versions by default */
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Hover effects */
+    .house:hover .gloomy-house {
       opacity: 0;
     }
-    .house:hover .new {
+    .house:hover .happy-house {
       opacity: 1;
     }
 
-    /* Right image hover (brain) */
-    .brain:hover .sad {
+    .brain:hover .gloomy-head {
       opacity: 0;
     }
-    .brain:hover .color {
+    .brain:hover .happy-head {
       opacity: 1;
     }
 
-    /* Links in between */
     .links {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 1rem;
+      z-index: 10;
     }
 
     .links a {
@@ -70,21 +86,14 @@
     .links a:hover {
       color: #fff;
     }
-
-    .hidden {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-    }
   </style>
 </head>
 <body>
   <h1>{{ site.title }}</h1>
   <div class="container">
     <div class="image-half house">
-      <img src="/assets/images/gloomy_house.png" alt="Old House" class="old">
-      <img src="/assets/images/happy_house.png" alt="New House" class="new hidden">
+      <img src="/assets/images/gloomy_house.png" alt="Gloomy House" class="gloomy-house">
+      <img src="/assets/images/happy_house.png" alt="Happy House" class="happy-house hidden">
     </div>
 
     <div class="links">
@@ -95,10 +104,9 @@
     </div>
 
     <div class="image-half brain">
-      <img src="/assets/images/gloomy_head.png" alt="Sad Brain" class="sad">
-      <img src="/assets/images/happy_head.png" alt="Color Brain" class="color hidden">
+      <img src="/assets/images/gloomy_head.png" alt="Gloomy Head" class="gloomy-head">
+      <img src="/assets/images/happy_head.png" alt="Happy Head" class="happy-head hidden">
     </div>
   </div>
 </body>
 </html>
-
