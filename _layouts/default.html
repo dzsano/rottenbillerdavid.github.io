@@ -8,107 +8,158 @@
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      color: #000000;
-      background-color: #ffffff;
-      display: flex;
+      color: #e0e0e0;
+      background-color: #000;
       height: 100vh;
+      overflow: hidden;
+      display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      transition: background-color 1s ease;
     }
 
-    h1 {
-      margin-bottom: 2rem;
-    }
-
-    .container {
-      display: flex;
-      width: 100%;
-      height: 80vh;
-      justify-content: space-around;
-      align-items: center;
-    }
-
-    .image-half {
+    .scene {
       position: relative;
-      width: 40%;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+      width: 100%;
     }
 
-    .image-half img {
-      width: 80%;
-      max-width: 400px;
+    /* Brain in the center */
+    .brain {
+      position: relative;
+      width: 25%;
+      max-width: 300px;
+      cursor: url('/assets/images/key-cursor.png'), auto;
+      transition: transform 0.3s ease;
+      z-index: 2;
+    }
+
+    .brain:hover {
+      transform: scale(1.05);
+    }
+
+    .brain img {
+      width: 100%;
       height: auto;
-      transition: opacity 0.5s ease;
+      display: block;
+      transition: opacity 0.6s ease;
+    }
+
+    /* Lock appears on hover */
+    .lock {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-    }
-
-    /* Hide the alternate (happy) versions by default */
-    .hidden {
       opacity: 0;
+      transition: opacity 0.5s ease;
       pointer-events: none;
+      width: 40%;
     }
 
-    /* Hover effects */
-    .house:hover .gloomy-house {
-      opacity: 0;
-    }
-    .house:hover .happy-house {
+    .brain:hover .lock {
       opacity: 1;
     }
 
-    .brain:hover .gloomy-head {
+    /* Silhouette and projection */
+    .silhouette {
+      position: absolute;
+      left: 10%;
+      width: 25%;
+      max-width: 250px;
+      z-index: 1;
+    }
+
+    .projection {
+      position: absolute;
+      right: 10%;
+      width: 30%;
+      max-width: 300px;
+      transition: opacity 1s ease;
+    }
+
+    /* Corner links */
+    .corner-links {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
       opacity: 0;
-    }
-    .brain:hover .happy-head {
-      opacity: 1;
+      transition: opacity 1s ease;
     }
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      z-index: 10;
-    }
-
-    .links a {
-      color: #000;
+    .corner-links a {
+      position: absolute;
+      color: #fff;
       text-decoration: none;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      pointer-events: auto;
       transition: color 0.3s;
     }
 
-    .links a:hover {
-      color: #e0e0e0;
+    .corner-links a:hover {
+      color: #000;
+    }
+
+    .corner-top-left { top: 10px; left: 10px; }
+    .corner-top-right { top: 10px; right: 10px; }
+    .corner-bottom-left { bottom: 10px; left: 10px; }
+    .corner-bottom-right { bottom: 10px; right: 10px; }
+
+    /* Happy mode styles */
+    body.happy {
+      background-color: #fff;
+      color: #000;
+    }
+
+    body.happy .corner-links {
+      opacity: 1;
+    }
+
+    body.happy .projection,
+    body.happy .brain img.gloomy {
+      opacity: 0;
+    }
+
+    body.happy .projection.happy,
+    body.happy .brain img.happy {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <h1>{{ site.title }}</h1>
-  <div class="container">
-    <div class="image-half house">
-      <img src="/assets/images/gloomy_house.png" alt="Gloomy House" class="gloomy-house">
-      <img src="/assets/images/happy_house.png" alt="Happy House" class="happy-house hidden">
+  <div class="scene">
+    <img src="/assets/images/silhouette.png" class="silhouette" alt="Human silhouette">
+
+    <div class="brain" id="brain">
+      <img src="/assets/images/gloomy_brain.png" class="gloomy" alt="Gloomy Brain">
+      <img src="/assets/images/happy_brain.png" class="happy" alt="Happy Brain" style="opacity:0;">
+      <img src="/assets/images/lock.png" class="lock" alt="Lock Icon">
     </div>
 
-   <div class="links">
-  <a href="rat.html">Rat Project</a>
-  <a href="cat.html">Cat Project</a>
-  <a href="macaque.html">Macaque Project</a>
-  <a href="human.html">Human Project</a>
-</div>
+    <img src="/assets/images/projection_scary.png" class="projection gloomy" alt="Scary Projection">
+    <img src="/assets/images/projection_happy.png" class="projection happy" alt="Happy Projection" style="opacity:0;">
 
-
-
-    <div class="image-half brain">
-      <img src="/assets/images/gloomy_head.png" alt="Gloomy Head" class="gloomy-head">
-      <img src="/assets/images/happy_head.png" alt="Happy Head" class="happy-head hidden">
+    <div class="corner-links">
+      <a href="rat.html" class="corner-top-left">Rat Project</a>
+      <a href="cat.html" class="corner-top-right">Cat Project</a>
+      <a href="macaque.html" class="corner-bottom-left">Macaque Project</a>
+      <a href="human.html" class="corner-bottom-right">Human Project</a>
     </div>
   </div>
+
+  <script>
+    const brain = document.getElementById('brain');
+    const body = document.body;
+
+    brain.addEventListener('click', () => {
+      body.classList.toggle('happy');
+    });
+  </script>
 </body>
 </html>
