@@ -42,7 +42,7 @@
   .silhouette {
     position: absolute;
     left: 5%;
-    top: -4%; /* slightly higher */
+    top: 4%; /* lower again, just slightly above before */
     width: 38vw;
     max-width: 600px;
     z-index: 1;
@@ -58,16 +58,14 @@
     opacity: 1;
   }
 
-  .projection.happy {
-    opacity: 0;
-  }
+  .projection.happy { opacity: 0; }
 
   .brain {
     position: relative;
     width: 50vw;
     max-width: 700px;
     z-index: 3;
-    transform: translateY(100px);
+    transform: translateY(160px); /* back down to earlier position */
   }
 
   .brain img {
@@ -80,31 +78,23 @@
     transition: opacity 1.2s ease;
   }
 
-  .brain img.happy {
-    opacity: 0;
-    z-index: 2;
-  }
-
-  .brain img.gloomy {
-    z-index: 1;
-  }
+  .brain img.happy { opacity: 0; z-index: 2; }
+  .brain img.gloomy { z-index: 1; }
 
   /* ----------- LOCK ----------- */
   .lock {
     position: absolute;
-    top: 55%;  /* lower */
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;  /* bigger */
+    width: 30%;
     opacity: 0;
     transition: opacity 0.6s ease;
     cursor: url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
     z-index: 4;
   }
 
-  .scene:hover .lock {
-    opacity: 1;
-  }
+  .scene:hover .lock { opacity: 1; }
 
   /* ----------- LINKS ----------- */
   .corner-links {
@@ -127,15 +117,11 @@
 
   .corner-top-left { top: 30px; left: 30px; }
   .corner-top-right { top: 30px; right: 30px; }
-  .corner-bottom-left { bottom: 140px; left: 30px; }  /* visible higher */
-  .corner-bottom-right { bottom: 140px; right: 30px; } /* visible higher */
+  .corner-bottom-left { bottom: 140px; left: 30px; }
+  .corner-bottom-right { bottom: 140px; right: 30px; }
 
   /* ----------- HAPPY MODE ----------- */
-  body.happy {
-    background: #fff;
-    color: #000;
-  }
-
+  body.happy { background: #fff; color: #000; }
   body.happy h1, body.happy h2 { color: #000; }
   body.happy .corner-links { opacity: 1; }
   body.happy .corner-links a { color: #000; }
@@ -187,7 +173,6 @@
     lock.style.opacity = '0';
     setTimeout(() => { lock.style.display = 'none'; }, 800);
 
-    // Crossfade manually (fix for previous opacity bug)
     brainGloomy.style.opacity = '0';
     projGloomy.style.opacity = '0';
     setTimeout(() => {
