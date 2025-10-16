@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }} | {{ site.title }}</title>
   <style>
+    /* ---------- BASE STYLING ---------- */
     body {
       margin: 0;
       font-family: 'Georgia', serif;
@@ -13,32 +14,46 @@
       height: 100vh;
       overflow: hidden;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      transition: background-color 1s ease;
+      justify-content: flex-start;
+      transition: background-color 1s ease, color 1s ease;
     }
 
+    /* ---------- TITLES ---------- */
+    h1, h2 {
+      text-align: center;
+      margin: 0.5rem;
+      transition: color 1s ease, opacity 1s ease;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: normal;
+    }
+
+    /* ---------- SCENE ---------- */
     .scene {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 80vh;
+      flex-grow: 1;
       width: 100%;
     }
 
-    /* Brain in the center */
+    /* Brain */
     .brain {
       position: relative;
-      width: 25%;
-      max-width: 300px;
-      cursor: url('/assets/images/key_cursor.png'), auto;
+      width: 35%;
+      max-width: 400px;
       transition: transform 0.3s ease;
-      z-index: 2;
-    }
-
-    .brain:hover {
-      transform: scale(1.05);
+      z-index: 3;
     }
 
     .brain img {
@@ -48,7 +63,7 @@
       transition: opacity 0.6s ease;
     }
 
-    /* Lock appears on hover */
+    /* Lock */
     .lock {
       position: absolute;
       top: 50%;
@@ -56,38 +71,37 @@
       transform: translate(-50%, -50%);
       opacity: 0;
       transition: opacity 0.5s ease;
-      pointer-events: none;
-      width: 40%;
+      width: 25%;
+      cursor: url('/assets/images/key-cursor.png'), auto;
+      z-index: 4;
     }
 
     .brain:hover .lock {
       opacity: 1;
     }
 
-    /* Silhouette and projection */
+    /* Human silhouette + projection */
     .silhouette {
       position: absolute;
-      left: 10%;
+      left: 8%;
       width: 25%;
-      max-width: 250px;
+      max-width: 300px;
       z-index: 1;
     }
 
     .projection {
       position: absolute;
-      right: 10%;
-      width: 30%;
-      max-width: 300px;
+      right: 8%;
+      width: 35%;
+      max-width: 350px;
       transition: opacity 1s ease;
+      z-index: 1;
     }
 
     /* Corner links */
     .corner-links {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       pointer-events: none;
       opacity: 0;
       transition: opacity 1s ease;
@@ -95,25 +109,27 @@
 
     .corner-links a {
       position: absolute;
-      color: #fff;
       text-decoration: none;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      font-weight: bold;
       pointer-events: auto;
-      transition: color 0.3s;
+      color: #fff;
+      transition: color 0.5s ease;
     }
 
-    .corner-links a:hover {
+    .corner-top-left { top: 15px; left: 20px; }
+    .corner-top-right { top: 15px; right: 20px; }
+    .corner-bottom-left { bottom: 15px; left: 20px; }
+    .corner-bottom-right { bottom: 15px; right: 20px; }
+
+    /* ---------- HAPPY MODE ---------- */
+    body.happy {
+      background-color: #fff;
       color: #000;
     }
 
-    .corner-top-left { top: 10px; left: 10px; }
-    .corner-top-right { top: 10px; right: 10px; }
-    .corner-bottom-left { bottom: 10px; left: 10px; }
-    .corner-bottom-right { bottom: 10px; right: 10px; }
-
-    /* Happy mode styles */
-    body.happy {
-      background-color: #fff;
+    body.happy h1,
+    body.happy h2 {
       color: #000;
     }
 
@@ -121,7 +137,11 @@
       opacity: 1;
     }
 
-    body.happy .projection,
+    body.happy .corner-links a {
+      color: #000;
+    }
+
+    body.happy .projection.gloomy,
     body.happy .brain img.gloomy {
       opacity: 0;
     }
@@ -130,16 +150,24 @@
     body.happy .brain img.happy {
       opacity: 1;
     }
+
+    body.happy .lock {
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <!-- Titles -->
+  <h1 id="title-main">Hillier Lab</h1>
+  <h2 id="title-sub">Unlocking the Mesoscale of the Brain</h2>
+
   <div class="scene">
     <img src="/assets/images/silhouette.png" class="silhouette" alt="Human silhouette">
 
     <div class="brain" id="brain">
       <img src="/assets/images/gloomy_brain.png" class="gloomy" alt="Gloomy Brain">
       <img src="/assets/images/happy_brain.png" class="happy" alt="Happy Brain" style="opacity:0;">
-      <img src="/assets/images/lock.png" class="lock" alt="Lock Icon">
+      <img src="/assets/images/lock.png" class="lock" id="lock" alt="Lock Icon">
     </div>
 
     <img src="/assets/images/projection_scary.png" class="projection gloomy" alt="Scary Projection">
@@ -154,11 +182,24 @@
   </div>
 
   <script>
-    const brain = document.getElementById('brain');
+    const lock = document.getElementById('lock');
     const body = document.body;
+    const titleMain = document.getElementById('title-main');
+    const titleSub = document.getElementById('title-sub');
 
-    brain.addEventListener('click', () => {
-      body.classList.toggle('happy');
+    let unlocked = false;
+
+    lock.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (unlocked) return;
+
+      // Activate happy mode
+      body.classList.add('happy');
+      unlocked = true;
+
+      // Change titles
+      titleMain.textContent = 'Hillier Lab';
+      titleSub.textContent = 'Bridging the Gap Between Molecules and Behavior';
     });
   </script>
 </body>
