@@ -5,121 +5,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} | {{ site.title }}</title>
 <style>
-  /* ----------- BASE ----------- */
-  html,body{
-    margin:0;
-    height:100%;
-    width:100%;
-    overflow:hidden;
-    font-family:"Georgia",serif;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    background:#000;
-    color:#e0e0e0;
-    transition:background-color 1.5s ease,color 1.5s ease;
-  }
+/* ---------- GLOBAL LAYOUT ---------- */
+html,body{
+  margin:0;
+  height:100%;
+  width:100%;
+  overflow:hidden;
+  font-family:"Georgia",serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  background:#000;
+  color:#e0e0e0;
+  transition:background-color 2s ease,color 2s ease;
+}
 
-  h1,h2{
-    margin:0.4rem;
-    text-align:center;
-    transition:color 1s ease,opacity 1s ease;
-  }
-  h1{font-size:2.8rem;font-weight:bold;}
-  h2{font-size:1.5rem;font-weight:normal;}
+/* ---------- TITLES ---------- */
+h1,h2{
+  margin:0.4rem;
+  text-align:center;
+  transition:color 1.5s ease,opacity 1.5s ease;
+}
+h1{font-size:3.4rem;font-weight:bold;}
+h2{font-size:1.6rem;font-weight:normal;}
 
-  /* ----------- SCENE ----------- */
-  .scene{
-    position:relative;
-    flex-grow:1;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-  }
+/* ---------- SCENE ---------- */
+.scene{
+  position:relative;
+  flex-grow:1;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-  .silhouette{
-    position:absolute;
-    left:5%;
-    width:30vw;
-    max-width:420px;
-    z-index:1;
-  }
+/* silhouette left */
+.silhouette{
+  position:absolute;
+  left:2%;
+  width:35vw;
+  max-width:600px;
+  z-index:1;
+}
 
-  .projection{
-    position:absolute;
-    right:5%;
-    width:38vw;
-    max-width:500px;
-    transition:opacity 2s ease;
-    z-index:1;
-  }
+/* projection right */
+.projection{
+  position:absolute;
+  right:2%;
+  width:45vw;
+  max-width:750px;
+  transition:opacity 2s ease;
+  z-index:1;
+}
 
-  .brain{
-    position:relative;
-    width:40vw;
-    max-width:500px;
-    z-index:3;
-  }
+/* brain center */
+.brain{
+  position:relative;
+  width:45vw;
+  max-width:700px;
+  z-index:5;
+}
+.brain img{
+  width:100%;
+  height:auto;
+  display:block;
+  transition:opacity 1.5s ease;
+}
 
-  .brain img{
-    width:100%;
-    height:auto;
-    display:block;
-    transition:opacity 1.2s ease;
-  }
+/* lock over brain */
+.lock{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:20%;
+  opacity:0;
+  pointer-events:auto;
+  transition:opacity 0.6s ease;
+  cursor:url('/assets/images/key-cursor.cur'),pointer;
+  z-index:6;
+}
+.brain:hover .lock{opacity:1;}
 
-  .lock{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:28%;
-    opacity:0;
-    pointer-events:auto;
-    transition:opacity 0.6s ease;
-    cursor:url('/assets/images/key-cursor.cur'),pointer;
-    z-index:4;
-  }
+/* glow behind brain */
+.glow{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:90%;
+  height:90%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,200,0.35) 0%,transparent 70%);
+  opacity:0;
+  z-index:0;
+  transition:opacity 2s ease;
+}
 
-  .brain:hover .lock{opacity:1;}
+/* ---------- LINKS ---------- */
+.corner-links{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+.corner-links a{
+  position:absolute;
+  font-size:1.8rem;
+  font-weight:bold;
+  text-decoration:none;
+  color:#fff;
+  pointer-events:auto;
+  transition:color 0.6s ease;
+}
+.corner-top-left{top:25px;left:30px;}
+.corner-top-right{top:25px;right:30px;}
+.corner-bottom-left{bottom:25px;left:30px;}
+.corner-bottom-right{bottom:25px;right:30px;}
 
-  /* ----------- LINKS ----------- */
-  .corner-links{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    opacity:0;
-    transition:opacity 1s ease;
-  }
-  .corner-links a{
-    position:absolute;
-    font-size:1.6rem;
-    font-weight:bold;
-    text-decoration:none;
-    color:#fff;
-    pointer-events:auto;
-    transition:color 0.6s ease;
-  }
-  .corner-top-left{top:20px;left:25px;}
-  .corner-top-right{top:20px;right:25px;}
-  .corner-bottom-left{bottom:20px;left:25px;}
-  .corner-bottom-right{bottom:20px;right:25px;}
-
-  /* ----------- HAPPY MODE ----------- */
-  body.happy{
-    background:#fff;
-    color:#000;
-  }
-  body.happy h1,body.happy h2{color:#000;}
-  body.happy .corner-links{opacity:1;}
-  body.happy .corner-links a{color:#000;}
-  body.happy .projection.gloomy,
-  body.happy .brain img.gloomy{opacity:0;}
-  body.happy .projection.happy,
-  body.happy .brain img.happy{opacity:1;}
-  body.happy .lock{display:none;}
+/* ---------- HAPPY MODE ---------- */
+body.happy{
+  background:#fff;
+  color:#000;
+}
+body.happy h1,body.happy h2{color:#000;}
+body.happy .corner-links{opacity:1;}
+body.happy .corner-links a{color:#000;}
+body.happy .projection.gloomy,
+body.happy .brain img.gloomy{opacity:0;}
+body.happy .projection.happy,
+body.happy .brain img.happy{opacity:1;}
+body.happy .glow{opacity:1;}
+body.happy .lock{display:none;}
 </style>
 </head>
 <body>
@@ -128,6 +147,8 @@
 
   <div class="scene">
     <img src="/assets/images/silhouette.png" class="silhouette" alt="Human silhouette">
+
+    <div class="glow"></div>
 
     <div class="brain">
       <img src="/assets/images/gloomy_brain.png" class="gloomy" alt="Gloomy brain">
@@ -147,21 +168,20 @@
   </div>
 
 <script>
-  const lock=document.getElementById('lock');
-  const body=document.body;
-  const titleMain=document.getElementById('title-main');
-  const titleSub=document.getElementById('title-sub');
-  let unlocked=false;
+const lock=document.getElementById('lock');
+const body=document.body;
+const titleMain=document.getElementById('title-main');
+const titleSub=document.getElementById('title-sub');
+let unlocked=false;
 
-  lock.addEventListener('click',e=>{
-    e.stopPropagation();
-    if(unlocked) return;
-    unlocked=true;
-    body.classList.add('happy');
-
-    titleMain.textContent='Hillier Lab';
-    titleSub.textContent='Bridging the Gap Between Molecules and Behavior';
-  });
+lock.addEventListener('click',e=>{
+  e.stopPropagation();
+  if(unlocked) return;
+  unlocked=true;
+  body.classList.add('happy');
+  titleMain.textContent='Hillier Lab';
+  titleSub.textContent='Bridging the Gap Between Molecules and Behavior';
+});
 </script>
 </body>
 </html>
