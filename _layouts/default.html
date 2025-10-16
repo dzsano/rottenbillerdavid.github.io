@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} | {{ site.title }}</title>
 <style>
-  html,body {
+  html, body {
     margin: 0;
     height: 100%;
     width: 100%;
@@ -20,11 +20,12 @@
     transition: background-color 1.5s ease, color 1.5s ease;
   }
 
-  h1,h2 {
+  h1, h2 {
     margin: 0.4rem;
     text-align: center;
     transition: color 1s ease, opacity 1s ease;
   }
+
   h1 { font-size: 3rem; font-weight: bold; }
   h2 { font-size: 1.6rem; font-weight: normal; }
 
@@ -41,6 +42,7 @@
   .silhouette {
     position: absolute;
     left: 5%;
+    top: -4%; /* slightly higher */
     width: 38vw;
     max-width: 600px;
     z-index: 1;
@@ -51,8 +53,13 @@
     right: 5%;
     width: 50vw;
     max-width: 800px;
-    transition: opacity 1.5s ease;
+    transition: opacity 1.2s ease;
     z-index: 1;
+    opacity: 1;
+  }
+
+  .projection.happy {
+    opacity: 0;
   }
 
   .brain {
@@ -60,31 +67,41 @@
     width: 50vw;
     max-width: 700px;
     z-index: 3;
-    transform: translateY(120px);
+    transform: translateY(100px);
   }
 
   .brain img {
     width: 100%;
     height: auto;
     display: block;
-    transition: opacity 1.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .brain img.happy {
+    opacity: 0;
+    z-index: 2;
+  }
+
+  .brain img.gloomy {
+    z-index: 1;
   }
 
   /* ----------- LOCK ----------- */
   .lock {
     position: absolute;
-    top: 10%; /* slightly higher */
+    top: 55%;  /* lower */
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 24%; /* restored slightly larger size */
+    width: 30%;  /* bigger */
     opacity: 0;
-    pointer-events: auto;
     transition: opacity 0.6s ease;
     cursor: url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
     z-index: 4;
   }
 
-  /* show lock only when hovering over brain */
   .scene:hover .lock {
     opacity: 1;
   }
@@ -97,6 +114,7 @@
     opacity: 0;
     transition: opacity 1s ease;
   }
+
   .corner-links a {
     position: absolute;
     font-size: 1.8rem;
@@ -106,37 +124,21 @@
     pointer-events: auto;
     transition: color 0.6s ease;
   }
+
   .corner-top-left { top: 30px; left: 30px; }
   .corner-top-right { top: 30px; right: 30px; }
-  .corner-bottom-left { bottom: 120px; left: 30px; }
-  .corner-bottom-right { bottom: 120px; right: 30px; }
+  .corner-bottom-left { bottom: 140px; left: 30px; }  /* visible higher */
+  .corner-bottom-right { bottom: 140px; right: 30px; } /* visible higher */
 
   /* ----------- HAPPY MODE ----------- */
   body.happy {
     background: #fff;
     color: #000;
   }
+
   body.happy h1, body.happy h2 { color: #000; }
   body.happy .corner-links { opacity: 1; }
   body.happy .corner-links a { color: #000; }
-
-  /* happy transition logic */
-  body:not(.happy) .brain img.happy,
-  body:not(.happy) .projection.happy {
-    opacity: 0;
-  }
-  body.happy .brain img.gloomy,
-  body.happy .projection.gloomy {
-    opacity: 0;
-  }
-  body.happy .brain img.happy,
-  body.happy .projection.happy {
-    opacity: 1;
-  }
-
-  body.happy .lock {
-    display: none;
-  }
 </style>
 </head>
 <body>
@@ -146,7 +148,7 @@
   <div class="scene">
     <img src="/assets/images/big_human.png" class="silhouette" alt="Human silhouette">
 
-    <div class="brain">
+    <div class="brain" id="brain">
       <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
       <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
     </div>
@@ -169,13 +171,30 @@
   const body = document.body;
   const titleMain = document.getElementById('title-main');
   const titleSub = document.getElementById('title-sub');
+  const brainGloomy = document.querySelector('.brain img.gloomy');
+  const brainHappy = document.querySelector('.brain img.happy');
+  const projGloomy = document.querySelector('.projection.gloomy');
+  const projHappy = document.querySelector('.projection.happy');
   let unlocked = false;
 
   lock.addEventListener('click', e => {
     e.stopPropagation();
     if (unlocked) return;
     unlocked = true;
+
     body.classList.add('happy');
+    lock.style.transition = 'opacity 0.8s ease';
+    lock.style.opacity = '0';
+    setTimeout(() => { lock.style.display = 'none'; }, 800);
+
+    // Crossfade manually (fix for previous opacity bug)
+    brainGloomy.style.opacity = '0';
+    projGloomy.style.opacity = '0';
+    setTimeout(() => {
+      brainHappy.style.opacity = '1';
+      projHappy.style.opacity = '1';
+    }, 300);
+
     titleMain.textContent = 'Hillier Lab';
     titleSub.textContent = 'Bridging the Gap Between Molecules and Behavior';
   });
