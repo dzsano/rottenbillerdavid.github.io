@@ -5,125 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} | {{ site.title }}</title>
 <style>
-  html,body{
-    margin:0;
-    height:100%;
-    width:100%;
-    overflow:hidden;
-    font-family:"Georgia",serif;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    background:#000;
-    color:#e0e0e0;
-    transition:background-color 1.5s ease,color 1.5s ease;
+  html,body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: "Georgia", serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #000;
+    color: #e0e0e0;
+    transition: background-color 1.5s ease, color 1.5s ease;
   }
 
-  h1,h2{
-    margin:0.4rem;
-    text-align:center;
-    transition:color 1s ease,opacity 1s ease;
+  h1,h2 {
+    margin: 0.4rem;
+    text-align: center;
+    transition: color 1s ease, opacity 1s ease;
   }
-  h1{font-size:3rem;font-weight:bold;}
-  h2{font-size:1.6rem;font-weight:normal;}
+  h1 { font-size: 3rem; font-weight: bold; }
+  h2 { font-size: 1.6rem; font-weight: normal; }
 
   /* ----------- SCENE ----------- */
-  .scene{
-    position:relative;
-    flex-grow:1;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  .scene {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .silhouette{
-    position:absolute;
-    left:5%;
-    width:38vw;
-    max-width:600px;
-    z-index:1;
+  .silhouette {
+    position: absolute;
+    left: 5%;
+    width: 38vw;
+    max-width: 600px;
+    z-index: 1;
   }
 
-  .projection{
-    position:absolute;
-    right:5%;
-    width:50vw;
-    max-width:800px;
-    transition:opacity 1.5s ease;
-    z-index:1;
+  .projection {
+    position: absolute;
+    right: 5%;
+    width: 50vw;
+    max-width: 800px;
+    transition: opacity 1.5s ease;
+    z-index: 1;
   }
 
-  .brain{
-    position:relative;
-    width:50vw;
-    max-width:700px;
-    z-index:3;
-    transform:translateY(100px);
+  .brain {
+    position: relative;
+    width: 50vw;
+    max-width: 700px;
+    z-index: 3;
+    transform: translateY(120px);
   }
 
-  .brain img{
-    width:100%;
-    height:auto;
-    display:block;
-    transition:opacity 1.2s ease;
+  .brain img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 1.5s ease;
   }
 
   /* ----------- LOCK ----------- */
-  .lock{
-    position:absolute;
-    top:25%; /* raised higher */
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:22%;
-    opacity:0;
-    pointer-events:auto;
-    transition:opacity 0.6s ease;
-    cursor:url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
-    z-index:4;
+  .lock {
+    position: absolute;
+    top: 10%; /* slightly higher */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24%; /* restored slightly larger size */
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity 0.6s ease;
+    cursor: url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
+    z-index: 4;
   }
 
-  /* Show lock only when hovering over brain area */
-  .scene:hover .lock{
-    opacity:1;
+  /* show lock only when hovering over brain */
+  .scene:hover .lock {
+    opacity: 1;
   }
 
   /* ----------- LINKS ----------- */
-  .corner-links{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    opacity:0;
-    transition:opacity 1s ease;
+  .corner-links {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
   }
-  .corner-links a{
-    position:absolute;
-    font-size:1.8rem;
-    font-weight:bold;
-    text-decoration:none;
-    color:#fff;
-    pointer-events:auto;
-    transition:color 0.6s ease;
+  .corner-links a {
+    position: absolute;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    pointer-events: auto;
+    transition: color 0.6s ease;
   }
-  .corner-top-left{top:30px;left:30px;}
-  .corner-top-right{top:30px;right:30px;}
-  .corner-bottom-left{bottom:80px;left:30px;} /* lifted up */
-  .corner-bottom-right{bottom:80px;right:30px;} /* lifted up */
+  .corner-top-left { top: 30px; left: 30px; }
+  .corner-top-right { top: 30px; right: 30px; }
+  .corner-bottom-left { bottom: 120px; left: 30px; }
+  .corner-bottom-right { bottom: 120px; right: 30px; }
 
   /* ----------- HAPPY MODE ----------- */
-  body.happy{
-    background:#fff;
-    color:#000;
+  body.happy {
+    background: #fff;
+    color: #000;
   }
-  body.happy h1,body.happy h2{color:#000;}
-  body.happy .corner-links{opacity:1;}
-  body.happy .corner-links a{color:#000;}
-  body.happy .projection.gloomy,
-  body.happy .brain img.gloomy{opacity:0;}
-  body.happy .projection.happy,
-  body.happy .brain img.happy{opacity:1;}
-  body.happy .lock{display:none;}
+  body.happy h1, body.happy h2 { color: #000; }
+  body.happy .corner-links { opacity: 1; }
+  body.happy .corner-links a { color: #000; }
+
+  /* happy transition logic */
+  body:not(.happy) .brain img.happy,
+  body:not(.happy) .projection.happy {
+    opacity: 0;
+  }
+  body.happy .brain img.gloomy,
+  body.happy .projection.gloomy {
+    opacity: 0;
+  }
+  body.happy .brain img.happy,
+  body.happy .projection.happy {
+    opacity: 1;
+  }
+
+  body.happy .lock {
+    display: none;
+  }
 </style>
 </head>
 <body>
@@ -135,14 +148,13 @@
 
     <div class="brain">
       <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
-      <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain" style="opacity:0;">
+      <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
     </div>
 
-    <!-- Lock floats independently above brain -->
     <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
 
     <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
-    <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection" style="opacity:0;">
+    <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
 
     <div class="corner-links">
       <a href="rat.html" class="corner-top-left">Rat Project</a>
@@ -153,19 +165,19 @@
   </div>
 
 <script>
-  const lock=document.getElementById('lock');
-  const body=document.body;
-  const titleMain=document.getElementById('title-main');
-  const titleSub=document.getElementById('title-sub');
-  let unlocked=false;
+  const lock = document.getElementById('lock');
+  const body = document.body;
+  const titleMain = document.getElementById('title-main');
+  const titleSub = document.getElementById('title-sub');
+  let unlocked = false;
 
-  lock.addEventListener('click',e=>{
+  lock.addEventListener('click', e => {
     e.stopPropagation();
-    if(unlocked) return;
-    unlocked=true;
+    if (unlocked) return;
+    unlocked = true;
     body.classList.add('happy');
-    titleMain.textContent='Hillier Lab';
-    titleSub.textContent='Bridging the Gap Between Molecules and Behavior';
+    titleMain.textContent = 'Hillier Lab';
+    titleSub.textContent = 'Bridging the Gap Between Molecules and Behavior';
   });
 </script>
 </body>
