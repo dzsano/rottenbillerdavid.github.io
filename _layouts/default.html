@@ -51,7 +51,7 @@
     right:5%;
     width:50vw;
     max-width:800px;
-    transition:opacity 2s ease;
+    transition:opacity 1.5s ease;
     z-index:1;
   }
 
@@ -60,32 +60,32 @@
     width:50vw;
     max-width:700px;
     z-index:3;
-    top:12%;
-    transform:translateY(80px);
+    transform:translateY(100px);
   }
 
   .brain img{
     width:100%;
     height:auto;
     display:block;
-    transition:opacity 1.5s ease;
+    transition:opacity 1.2s ease;
   }
 
+  /* ----------- LOCK ----------- */
   .lock{
     position:absolute;
-    top:40%;
+    top:25%; /* raised higher */
     left:50%;
     transform:translate(-50%,-50%);
     width:22%;
     opacity:0;
     pointer-events:auto;
     transition:opacity 0.6s ease;
-    cursor:url('/assets/images/key-cursor.cur') 16 16, url('/assets/images/key-cursor.png') 16 16, pointer;
+    cursor:url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
     z-index:4;
   }
 
-  .brain:hover + .lock,
-  .brain:hover .lock{
+  /* Show lock only when hovering over brain area */
+  .scene:hover .lock{
     opacity:1;
   }
 
@@ -106,10 +106,10 @@
     pointer-events:auto;
     transition:color 0.6s ease;
   }
-  .corner-top-left{top:20px;left:25px;}
-  .corner-top-right{top:20px;right:25px;}
-  .corner-bottom-left{bottom:20px;left:25px;}
-  .corner-bottom-right{bottom:20px;right:25px;}
+  .corner-top-left{top:30px;left:30px;}
+  .corner-top-right{top:30px;right:30px;}
+  .corner-bottom-left{bottom:80px;left:30px;} /* lifted up */
+  .corner-bottom-right{bottom:80px;right:30px;} /* lifted up */
 
   /* ----------- HAPPY MODE ----------- */
   body.happy{
@@ -136,8 +136,10 @@
     <div class="brain">
       <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
       <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain" style="opacity:0;">
-      <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
     </div>
+
+    <!-- Lock floats independently above brain -->
+    <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
 
     <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
     <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection" style="opacity:0;">
