@@ -60,7 +60,8 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 /* Projection */
 .projection {
   position: absolute;
-  right: 5%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 50vw;
   max-width: 800px;
   transition: opacity 1.2s ease;
@@ -71,7 +72,7 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 /* Brain under lock */
 .brain {
   position: absolute;
-  top: 10%; /* brain stays here */
+  top: 10%; /* brain position */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50vw;
@@ -143,8 +144,8 @@ body.happy .corner-links a { color: #000; }
 
 <div class="scene">
   <!-- Silhouettes -->
-  <img src="/assets/images/big_human.png" class="silhouette-left" alt="Human silhouette left">
-  <img src="/assets/images/big_human_projection.png" class="silhouette-right" alt="Human silhouette right">
+  <img src="/assets/images/big_human_left.png" class="silhouette-left" alt="Human silhouette left">
+  <img src="/assets/images/big_human_right.png" class="silhouette-right" alt="Human silhouette right">
 
   <!-- Brain -->
   <div class="brain" id="brain">
