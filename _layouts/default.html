@@ -5,184 +5,188 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} | {{ site.title }}</title>
 <style>
-  html, body {
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font-family: "Georgia", serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background: #000;
-    color: #e0e0e0;
-    transition: background-color 1.5s ease, color 1.5s ease;
-  }
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: "Georgia", serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #000;
+  color: #e0e0e0;
+  transition: background-color 1.5s ease, color 1.5s ease;
+}
 
-  h1, h2 {
-    margin: 0.4rem;
-    text-align: center;
-    transition: color 1s ease, opacity 1s ease;
-  }
+h1, h2 {
+  margin: 0.4rem;
+  text-align: center;
+  transition: color 1s ease, opacity 1s ease;
+}
 
-  h1 { font-size: 3rem; font-weight: bold; }
-  h2 { font-size: 1.6rem; font-weight: normal; }
+h1 { font-size: 3rem; font-weight: bold; }
+h2 { font-size: 1.6rem; font-weight: normal; }
 
-  /* ----------- SCENE ----------- */
-  .scene {
-    position: relative;
-    flex-grow: 1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+/* ----------- SCENE ----------- */
+.scene {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .silhouette {
-    position: absolute;
-    left: 5%;
-    top: 4%; /* lower again, just slightly above before */
-    width: 38vw;
-    max-width: 600px;
-    z-index: 1;
-  }
+/* Silhouette */
+.silhouette {
+  position: absolute;
+  left: 5%;
+  top: 12%; /* lower slightly */
+  width: 50vw;
+  max-width: 800px;
+  z-index: 1;
+}
 
-  .projection {
-    position: absolute;
-    right: 5%;
-    width: 50vw;
-    max-width: 800px;
-    transition: opacity 1.2s ease;
-    z-index: 1;
-    opacity: 1;
-  }
+/* Projection */
+.projection {
+  position: absolute;
+  right: 5%;
+  width: 50vw;
+  max-width: 800px;
+  transition: opacity 1.2s ease;
+  z-index: 1;
+  opacity: 1;
+}
+.projection.happy { opacity: 0; }
 
-  .projection.happy { opacity: 0; }
+/* Brain under lock */
+.brain {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  max-width: 700px;
+  z-index: 2; /* under lock */
+}
+.brain img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 1.2s ease;
+}
+.brain img.happy { opacity: 0; z-index: 2; }
+.brain img.gloomy { z-index: 1; }
 
-  .brain {
-    position: relative;
-    width: 50vw;
-    max-width: 700px;
-    z-index: 3;
-    transform: translateY(160px); /* back down to earlier position */
-  }
+/* Lock on top */
+.lock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  cursor: url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
+  z-index: 3; /* above brain */
+}
+.scene:hover .lock { opacity: 1; }
 
-  .brain img {
-    width: 100%;
-    height: auto;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 1.2s ease;
-  }
+/* Links */
+.corner-links {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.corner-links a {
+  position: absolute;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  pointer-events: auto;
+  transition: color 0.6s ease;
+}
+.corner-top-left { top: 30px; left: 30px; }
+.corner-top-right { top: 30px; right: 30px; }
+.corner-bottom-left { bottom: 140px; left: 30px; }
+.corner-bottom-right { bottom: 140px; right: 30px; }
 
-  .brain img.happy { opacity: 0; z-index: 2; }
-  .brain img.gloomy { z-index: 1; }
+/* Happy Mode */
+body.happy {
+  background: #fff;
+  color: #000;
+}
+body.happy h1, body.happy h2 { color: #000; }
+body.happy .corner-links { opacity: 1; }
+body.happy .corner-links a { color: #000; }
 
-  /* ----------- LOCK ----------- */
-  .lock {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    cursor: url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
-    z-index: 4;
-  }
-
-  .scene:hover .lock { opacity: 1; }
-
-  /* ----------- LINKS ----------- */
-  .corner-links {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-
-  .corner-links a {
-    position: absolute;
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
-    pointer-events: auto;
-    transition: color 0.6s ease;
-  }
-
-  .corner-top-left { top: 30px; left: 30px; }
-  .corner-top-right { top: 30px; right: 30px; }
-  .corner-bottom-left { bottom: 140px; left: 30px; }
-  .corner-bottom-right { bottom: 140px; right: 30px; }
-
-  /* ----------- HAPPY MODE ----------- */
-  body.happy { background: #fff; color: #000; }
-  body.happy h1, body.happy h2 { color: #000; }
-  body.happy .corner-links { opacity: 1; }
-  body.happy .corner-links a { color: #000; }
 </style>
 </head>
 <body>
-  <h1 id="title-main">Hillier Lab</h1>
-  <h2 id="title-sub">Unlocking the Mesoscale of the Brain</h2>
+<h1 id="title-main">Hillier Lab</h1>
+<h2 id="title-sub">Unlocking the Mesoscale of the Brain</h2>
 
-  <div class="scene">
-    <img src="/assets/images/big_human.png" class="silhouette" alt="Human silhouette">
+<div class="scene">
+  <img src="/assets/images/big_human.png" class="silhouette" alt="Human silhouette">
 
-    <div class="brain" id="brain">
-      <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
-      <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
-    </div>
-
-    <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
-
-    <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
-    <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
-
-    <div class="corner-links">
-      <a href="rat.html" class="corner-top-left">Rat Project</a>
-      <a href="cat.html" class="corner-top-right">Cat Project</a>
-      <a href="macaque.html" class="corner-bottom-left">Macaque Project</a>
-      <a href="human.html" class="corner-bottom-right">Human Project</a>
-    </div>
+  <div class="brain" id="brain">
+    <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
+    <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
   </div>
 
+  <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
+
+  <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
+  <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
+
+  <div class="corner-links">
+    <a href="/rat/">Rat Project</a>
+    <a href="/cat/">Cat Project</a>
+    <a href="/macaque/">Macaque Project</a>
+    <a href="/human/">Human Project</a>
+  </div>
+</div>
+
 <script>
-  const lock = document.getElementById('lock');
-  const body = document.body;
-  const titleMain = document.getElementById('title-main');
-  const titleSub = document.getElementById('title-sub');
-  const brainGloomy = document.querySelector('.brain img.gloomy');
-  const brainHappy = document.querySelector('.brain img.happy');
-  const projGloomy = document.querySelector('.projection.gloomy');
-  const projHappy = document.querySelector('.projection.happy');
-  let unlocked = false;
+const lock = document.getElementById('lock');
+const body = document.body;
+const titleMain = document.getElementById('title-main');
+const titleSub = document.getElementById('title-sub');
+const brainGloomy = document.querySelector('.brain img.gloomy');
+const brainHappy = document.querySelector('.brain img.happy');
+const projGloomy = document.querySelector('.projection.gloomy');
+const projHappy = document.querySelector('.projection.happy');
+let unlocked = false;
 
-  lock.addEventListener('click', e => {
-    e.stopPropagation();
-    if (unlocked) return;
-    unlocked = true;
+lock.addEventListener('click', e => {
+  e.stopPropagation();
+  if (unlocked) return;
+  unlocked = true;
 
-    body.classList.add('happy');
-    lock.style.transition = 'opacity 0.8s ease';
-    lock.style.opacity = '0';
-    setTimeout(() => { lock.style.display = 'none'; }, 800);
+  body.classList.add('happy');
 
-    brainGloomy.style.opacity = '0';
-    projGloomy.style.opacity = '0';
-    setTimeout(() => {
-      brainHappy.style.opacity = '1';
-      projHappy.style.opacity = '1';
-    }, 300);
+  lock.style.transition = 'opacity 0.8s ease';
+  lock.style.opacity = '0';
+  setTimeout(() => { lock.style.display = 'none'; }, 800);
 
-    titleMain.textContent = 'Hillier Lab';
-    titleSub.textContent = 'Bridging the Gap Between Molecules and Behavior';
-  });
+  brainGloomy.style.opacity = '0';
+  projGloomy.style.opacity = '0';
+  setTimeout(() => {
+    brainHappy.style.opacity = '1';
+    projHappy.style.opacity = '1';
+  }, 300);
+
+  titleMain.textContent = 'Hillier Lab';
+  titleSub.textContent = 'Bridging the Gap Between Molecules and Behavior';
+});
 </script>
 </body>
 </html>
