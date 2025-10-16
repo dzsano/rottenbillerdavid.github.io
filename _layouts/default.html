@@ -39,13 +39,21 @@ h2 { font-size: 1.6rem; font-weight: normal; }
   align-items: center;
 }
 
-/* Silhouette */
-.silhouette {
+/* Silhouettes */
+.silhouette-left {
   position: absolute;
   left: 5%;
-  top: 12%;
-  width: 50vw;
-  max-width: 800px;
+  top: 15%;
+  width: 40vw;
+  max-width: 600px;
+  z-index: 1;
+}
+.silhouette-right {
+  position: absolute;
+  right: 5%;
+  top: 15%;
+  width: 40vw;
+  max-width: 600px;
   z-index: 1;
 }
 
@@ -64,7 +72,7 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 /* Brain under lock */
 .brain {
   position: absolute;
-  top: 10%; /* Raised higher */
+  top: 10%; /* your updated top */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50vw;
@@ -116,8 +124,8 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 }
 .corner-top-left { top: 30px; left: 30px; }
 .corner-top-right { top: 30px; right: 30px; }
-.corner-bottom-left { bottom: 30px; left: 30px; }
-.corner-bottom-right { bottom: 30px; right: 30px; }
+.corner-bottom-left { bottom: 60px; left: 30px; }  /* slightly higher for visibility */
+.corner-bottom-right { bottom: 60px; right: 30px; }
 
 /* Happy Mode */
 body.happy {
@@ -135,7 +143,8 @@ body.happy .corner-links a { color: #000; }
 <h2 id="title-sub">Unlocking the Mesoscale of the Brain</h2>
 
 <div class="scene">
-  <img src="/assets/images/big_human.png" class="silhouette" alt="Human silhouette">
+  <img src="/assets/images/big_human.png" class="silhouette-left" alt="Human silhouette left">
+  <img src="/assets/images/big_scary.png" class="silhouette-right" alt="Human silhouette right">
 
   <div class="brain" id="brain">
     <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
