@@ -64,7 +64,7 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 /* Brain under lock */
 .brain {
   position: absolute;
-  top: 48%; /* slightly higher so lock sits on top */
+  top: 43%; /* RAISED */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50vw;
@@ -127,6 +127,7 @@ body.happy {
 body.happy h1, body.happy h2 { color: #000; }
 body.happy .corner-links { opacity: 1; }
 body.happy .corner-links a { color: #000; }
+
 </style>
 </head>
 <body>
@@ -147,10 +148,10 @@ body.happy .corner-links a { color: #000; }
   <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
 
   <div class="corner-links">
-    <a href="/rat/">Rat Project</a>
-    <a href="/cat/">Cat Project</a>
-    <a href="/macaque/">Macaque Project</a>
-    <a href="/human/">Human Project</a>
+    <a href="/rat/" class="corner-top-left">Rat Project</a>
+    <a href="/cat/" class="corner-top-right">Cat Project</a>
+    <a href="/macaque/" class="corner-bottom-left">Macaque Project</a>
+    <a href="/human/" class="corner-bottom-right">Human Project</a>
   </div>
 </div>
 
