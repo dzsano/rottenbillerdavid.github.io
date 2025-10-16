@@ -1,177 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <style>
-    /* ---------- BASE STYLING ---------- */
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      color: #e0e0e0;
-      background-color: #000;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      transition: background-color 1s ease, color 1s ease;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} | {{ site.title }}</title>
+<style>
+  /* ----------- BASE ----------- */
+  html,body{
+    margin:0;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    font-family:"Georgia",serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    background:#000;
+    color:#e0e0e0;
+    transition:background-color 1.5s ease,color 1.5s ease;
+  }
 
-    /* ---------- TITLES ---------- */
-    h1, h2 {
-      text-align: center;
-      margin: 0.5rem;
-      transition: color 1s ease, opacity 1s ease;
-    }
+  h1,h2{
+    margin:0.4rem;
+    text-align:center;
+    transition:color 1s ease,opacity 1s ease;
+  }
+  h1{font-size:2.8rem;font-weight:bold;}
+  h2{font-size:1.5rem;font-weight:normal;}
 
-    h1 {
-      font-size: 2.2rem;
-      font-weight: bold;
-    }
+  /* ----------- SCENE ----------- */
+  .scene{
+    position:relative;
+    flex-grow:1;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
 
-    h2 {
-      font-size: 1.3rem;
-      font-weight: normal;
-    }
+  .silhouette{
+    position:absolute;
+    left:5%;
+    width:30vw;
+    max-width:420px;
+    z-index:1;
+  }
 
-    /* ---------- SCENE ---------- */
-    .scene {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1;
-      width: 100%;
-    }
+  .projection{
+    position:absolute;
+    right:5%;
+    width:38vw;
+    max-width:500px;
+    transition:opacity 2s ease;
+    z-index:1;
+  }
 
-    /* Brain */
-    .brain {
-      position: relative;
-      width: 35%;
-      max-width: 400px;
-      transition: transform 0.3s ease;
-      z-index: 3;
-    }
+  .brain{
+    position:relative;
+    width:40vw;
+    max-width:500px;
+    z-index:3;
+  }
 
-    .brain img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: opacity 0.6s ease;
-    }
+  .brain img{
+    width:100%;
+    height:auto;
+    display:block;
+    transition:opacity 1.2s ease;
+  }
 
-    /* Lock */
-    .lock {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      width: 25%;
-      cursor: url('/assets/images/key_cursor.png'), auto;
-      z-index: 4;
-    }
+  .lock{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:28%;
+    opacity:0;
+    pointer-events:auto;
+    transition:opacity 0.6s ease;
+    cursor:url('/assets/images/key-cursor.cur'),pointer;
+    z-index:4;
+  }
 
-    .brain:hover .lock {
-      opacity: 1;
-    }
+  .brain:hover .lock{opacity:1;}
 
-    /* Human silhouette + projection */
-    .silhouette {
-      position: absolute;
-      left: 8%;
-      width: 25%;
-      max-width: 300px;
-      z-index: 1;
-    }
+  /* ----------- LINKS ----------- */
+  .corner-links{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity 1s ease;
+  }
+  .corner-links a{
+    position:absolute;
+    font-size:1.6rem;
+    font-weight:bold;
+    text-decoration:none;
+    color:#fff;
+    pointer-events:auto;
+    transition:color 0.6s ease;
+  }
+  .corner-top-left{top:20px;left:25px;}
+  .corner-top-right{top:20px;right:25px;}
+  .corner-bottom-left{bottom:20px;left:25px;}
+  .corner-bottom-right{bottom:20px;right:25px;}
 
-    .projection {
-      position: absolute;
-      right: 8%;
-      width: 35%;
-      max-width: 350px;
-      transition: opacity 1s ease;
-      z-index: 1;
-    }
-
-    /* Corner links */
-    .corner-links {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-
-    .corner-links a {
-      position: absolute;
-      text-decoration: none;
-      font-size: 1.4rem;
-      font-weight: bold;
-      pointer-events: auto;
-      color: #fff;
-      transition: color 0.5s ease;
-    }
-
-    .corner-top-left { top: 15px; left: 20px; }
-    .corner-top-right { top: 15px; right: 20px; }
-    .corner-bottom-left { bottom: 15px; left: 20px; }
-    .corner-bottom-right { bottom: 15px; right: 20px; }
-
-    /* ---------- HAPPY MODE ---------- */
-    body.happy {
-      background-color: #fff;
-      color: #000;
-    }
-
-    body.happy h1,
-    body.happy h2 {
-      color: #000;
-    }
-
-    body.happy .corner-links {
-      opacity: 1;
-    }
-
-    body.happy .corner-links a {
-      color: #000;
-    }
-
-    body.happy .projection.gloomy,
-    body.happy .brain img.gloomy {
-      opacity: 0;
-    }
-
-    body.happy .projection.happy,
-    body.happy .brain img.happy {
-      opacity: 1;
-    }
-
-    body.happy .lock {
-      display: none;
-    }
-  </style>
+  /* ----------- HAPPY MODE ----------- */
+  body.happy{
+    background:#fff;
+    color:#000;
+  }
+  body.happy h1,body.happy h2{color:#000;}
+  body.happy .corner-links{opacity:1;}
+  body.happy .corner-links a{color:#000;}
+  body.happy .projection.gloomy,
+  body.happy .brain img.gloomy{opacity:0;}
+  body.happy .projection.happy,
+  body.happy .brain img.happy{opacity:1;}
+  body.happy .lock{display:none;}
+</style>
 </head>
 <body>
-  <!-- Titles -->
   <h1 id="title-main">Hillier Lab</h1>
   <h2 id="title-sub">Unlocking the Mesoscale of the Brain</h2>
 
   <div class="scene">
     <img src="/assets/images/silhouette.png" class="silhouette" alt="Human silhouette">
 
-    <div class="brain" id="brain">
-      <img src="/assets/images/gloomy_brain.png" class="gloomy" alt="Gloomy Brain">
-      <img src="/assets/images/happy_brain.png" class="happy" alt="Happy Brain" style="opacity:0;">
-      <img src="/assets/images/lock.png" class="lock" id="lock" alt="Lock Icon">
+    <div class="brain">
+      <img src="/assets/images/gloomy_brain.png" class="gloomy" alt="Gloomy brain">
+      <img src="/assets/images/happy_brain.png" class="happy" alt="Happy brain" style="opacity:0;">
+      <img src="/assets/images/lock.png" class="lock" id="lock" alt="Lock">
     </div>
 
-    <img src="/assets/images/projection_scary.png" class="projection gloomy" alt="Scary Projection">
-    <img src="/assets/images/projection_happy.png" class="projection happy" alt="Happy Projection" style="opacity:0;">
+    <img src="/assets/images/projection_scary.png" class="projection gloomy" alt="Scary projection">
+    <img src="/assets/images/projection_happy.png" class="projection happy" alt="Happy projection" style="opacity:0;">
 
     <div class="corner-links">
       <a href="rat.html" class="corner-top-left">Rat Project</a>
@@ -181,26 +146,22 @@
     </div>
   </div>
 
-  <script>
-    const lock = document.getElementById('lock');
-    const body = document.body;
-    const titleMain = document.getElementById('title-main');
-    const titleSub = document.getElementById('title-sub');
+<script>
+  const lock=document.getElementById('lock');
+  const body=document.body;
+  const titleMain=document.getElementById('title-main');
+  const titleSub=document.getElementById('title-sub');
+  let unlocked=false;
 
-    let unlocked = false;
+  lock.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(unlocked) return;
+    unlocked=true;
+    body.classList.add('happy');
 
-    lock.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (unlocked) return;
-
-      // Activate happy mode
-      body.classList.add('happy');
-      unlocked = true;
-
-      // Change titles
-      titleMain.textContent = 'Hillier Lab';
-      titleSub.textContent = 'Bridging the Gap Between Molecules and Behavior';
-    });
-  </script>
+    titleMain.textContent='Hillier Lab';
+    titleSub.textContent='Bridging the Gap Between Molecules and Behavior';
+  });
+</script>
 </body>
 </html>
