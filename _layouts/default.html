@@ -11,67 +11,65 @@ html, body {
   width: 100%;
   overflow: hidden;
   font-family: "Georgia", serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   background: #000;
   color: #e0e0e0;
   transition: background-color 1.5s ease, color 1.5s ease;
 }
 
-/* Titles */
 h1, h2 {
   margin: 0.4rem;
   text-align: center;
   transition: color 1s ease, opacity 1s ease;
 }
+
 h1 { font-size: 3rem; font-weight: bold; }
 h2 { font-size: 1.6rem; font-weight: normal; }
 
-/* Scene container */
+/* ----------- SCENE ----------- */
 .scene {
   position: relative;
+  flex-grow: 1;
   width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Silhouettes */
-.silhouette-left {
+/* Silhouette */
+.silhouette {
   position: absolute;
   left: 5%;
-  top: 20%;
-  width: 35vw;
-  max-width: 600px;
-  z-index: 1;
-}
-.silhouette-right {
-  position: absolute;
-  right: 5%;
-  top: 20%;
-  width: 35vw;
-  max-width: 600px;
+  top: 12%;
+  width: 50vw;
+  max-width: 800px;
   z-index: 1;
 }
 
-/* Projections */
+/* Projection */
 .projection {
   position: absolute;
-  left: 50%;
-  top: 30%;
-  transform: translateX(-50%);
+  right: 5%;
   width: 50vw;
   max-width: 800px;
   transition: opacity 1.2s ease;
-  z-index: 2;
+  z-index: 1;
+  opacity: 1;
 }
 .projection.happy { opacity: 0; }
 
 /* Brain under lock */
 .brain {
   position: absolute;
-  top: 10%;
+  top: 10%; /* Raised higher */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50vw;
   max-width: 700px;
-  z-index: 3;
+  z-index: 2;
 }
 .brain img {
   width: 100%;
@@ -85,21 +83,21 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 .brain img.happy { opacity: 0; z-index: 2; }
 .brain img.gloomy { z-index: 1; }
 
-/* Lock */
+/* Lock on top */
 .lock {
   position: absolute;
-  top: 35%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30%;
   opacity: 0;
   transition: opacity 0.6s ease;
   cursor: url('/assets/images/key-cursor.cur') 8 8, url('/assets/images/key-cursor.png') 8 8, pointer;
-  z-index: 4;
+  z-index: 3;
 }
 .scene:hover .lock { opacity: 1; }
 
-/* Corner Links */
+/* Links */
 .corner-links {
   position: absolute;
   inset: 0;
@@ -118,8 +116,8 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 }
 .corner-top-left { top: 30px; left: 30px; }
 .corner-top-right { top: 30px; right: 30px; }
-.corner-bottom-left { bottom: 60px; left: 30px; }
-.corner-bottom-right { bottom: 60px; right: 30px; }
+.corner-bottom-left { bottom: 30px; left: 30px; }
+.corner-bottom-right { bottom: 30px; right: 30px; }
 
 /* Happy Mode */
 body.happy {
@@ -129,11 +127,7 @@ body.happy {
 body.happy h1, body.happy h2 { color: #000; }
 body.happy .corner-links { opacity: 1; }
 body.happy .corner-links a { color: #000; }
-body.happy .projection.gloomy,
-body.happy .brain img.gloomy { opacity: 0; }
-body.happy .projection.happy,
-body.happy .brain img.happy { opacity: 1; }
-body.happy .lock { display: none; }
+
 </style>
 </head>
 <body>
@@ -141,24 +135,18 @@ body.happy .lock { display: none; }
 <h2 id="title-sub">Unlocking the Mesoscale of the Brain</h2>
 
 <div class="scene">
-  <!-- Silhouettes -->
-  <img src="/assets/images/big_human_left.png" class="silhouette-left" alt="Human silhouette left">
-  <img src="/assets/images/big_human_right.png" class="silhouette-right" alt="Human silhouette right">
+  <img src="/assets/images/big_human.png" class="silhouette" alt="Human silhouette">
 
-  <!-- Brain -->
-  <div class="brain">
+  <div class="brain" id="brain">
     <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
     <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
   </div>
 
-  <!-- Lock -->
   <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
 
-  <!-- Projections -->
   <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
   <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
 
-  <!-- Corner Links -->
   <div class="corner-links">
     <a href="/rat.html" class="corner-top-left">Rat Project</a>
     <a href="/cat.html" class="corner-top-right">Cat Project</a>
@@ -185,8 +173,9 @@ lock.addEventListener('click', e => {
 
   body.classList.add('happy');
 
+  lock.style.transition = 'opacity 0.8s ease';
   lock.style.opacity = '0';
-  setTimeout(() => { lock.style.display = 'none'; }, 600);
+  setTimeout(() => { lock.style.display = 'none'; }, 800);
 
   brainGloomy.style.opacity = '0';
   projGloomy.style.opacity = '0';
