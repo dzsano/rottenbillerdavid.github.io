@@ -65,14 +65,13 @@ h2 { font-size: 1.6rem; font-weight: normal; }
   max-width: 800px;
   transition: opacity 1.2s ease;
   z-index: 1;
-  opacity: 1;
 }
 .projection.happy { opacity: 0; }
 
 /* Brain under lock */
 .brain {
   position: absolute;
-  top: 10%; /* your updated top */
+  top: 10%; /* brain stays here */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50vw;
@@ -94,7 +93,7 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 /* Lock on top */
 .lock {
   position: absolute;
-  top: 35%;
+  top: 35%; /* updated lock position */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30%;
@@ -124,7 +123,7 @@ h2 { font-size: 1.6rem; font-weight: normal; }
 }
 .corner-top-left { top: 30px; left: 30px; }
 .corner-top-right { top: 30px; right: 30px; }
-.corner-bottom-left { bottom: 60px; left: 30px; }  /* slightly higher for visibility */
+.corner-bottom-left { bottom: 60px; left: 30px; }
 .corner-bottom-right { bottom: 60px; right: 30px; }
 
 /* Happy Mode */
@@ -143,19 +142,24 @@ body.happy .corner-links a { color: #000; }
 <h2 id="title-sub">Unlocking the Mesoscale of the Brain</h2>
 
 <div class="scene">
+  <!-- Silhouettes -->
   <img src="/assets/images/big_human.png" class="silhouette-left" alt="Human silhouette left">
-  <img src="/assets/images/big_scary.png" class="silhouette-right" alt="Human silhouette right">
+  <img src="/assets/images/big_human_projection.png" class="silhouette-right" alt="Human silhouette right">
 
+  <!-- Brain -->
   <div class="brain" id="brain">
     <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
     <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
   </div>
 
+  <!-- Lock -->
   <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
 
+  <!-- Projections -->
   <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
   <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
 
+  <!-- Corner Links -->
   <div class="corner-links">
     <a href="/rat.html" class="corner-top-left">Rat Project</a>
     <a href="/cat.html" class="corner-top-right">Cat Project</a>
