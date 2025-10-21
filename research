@@ -1,9 +1,8 @@
 ---
-layout: default
+layout: page
 title: Research
 ---
-
-<section style="margin-top:100px; text-align:center; max-width:800px;">
-  <h1>Research</h1>
-  <p>We combine advanced neuroimaging, computational modeling, and behavioral experiments to explore how neural circuits function across species.</p>
-</section>
+<h1>Research</h1>
+<p>
+  Our projects explore the multi-scale architecture of neural systems across species using advanced imaging and computational tools...
+</p>
