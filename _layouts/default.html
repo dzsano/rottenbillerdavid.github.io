@@ -34,30 +34,44 @@ html, body {
   padding: 0 30px;
   box-sizing: border-box;
   z-index: 10;
-  transition: background-color 1.5s ease, color 1.5s ease;
+  border-bottom: 2px solid #333;
+  transition: background-color 1.5s ease, color 1.5s ease, border-color 1.5s ease;
 }
-.navbar a {
+
+/* Brand on left */
+.navbar .brand a {
   text-decoration: none;
   color: inherit;
   font-weight: bold;
-  font-size: 1rem;
-  margin-left: 25px;
-  transition: color 0.4s ease;
-}
-.navbar a:hover {
-  text-decoration: underline;
-}
-
-/* Left title button */
-.navbar .brand {
-  font-weight: bold;
   font-size: 1.1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-/* Right menu links */
+/* Buttons on right */
 .navbar .nav-links {
   display: flex;
   align-items: center;
+  gap: 15px;
+}
+
+.navbar .nav-links a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  font-size: 0.95rem;
+  padding: 8px 14px;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  background: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+  background-color: currentColor;
+  color: inherit;
+  filter: invert(1);
 }
 
 /* ----------- SCENE ----------- */
@@ -94,7 +108,7 @@ html, body {
 }
 .projection.happy { opacity: 0; }
 
-/* Brain under lock */
+/* Brain */
 .brain {
   position: absolute;
   top: 10%;
@@ -107,7 +121,6 @@ html, body {
 .brain img {
   width: 100%;
   height: auto;
-  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -116,7 +129,7 @@ html, body {
 .brain img.happy { opacity: 0; z-index: 2; }
 .brain img.gloomy { z-index: 1; }
 
-/* Lock on top */
+/* Lock */
 .lock {
   position: absolute;
   top: 35%;
@@ -130,20 +143,20 @@ html, body {
 }
 .scene:hover .lock { opacity: 1; }
 
-/* Subtitle below brain */
+/* Subtitle under brain */
 .subtitle {
   position: absolute;
   top: 70%;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
   color: inherit;
   transition: color 1s ease;
   z-index: 5;
 }
 
-/* Links (corner project links) */
+/* Corner links */
 .corner-links {
   position: absolute;
   inset: 0;
@@ -173,6 +186,7 @@ body.happy {
 body.happy .navbar {
   background-color: #fff;
   color: #000;
+  border-color: #ccc;
 }
 body.happy .corner-links { opacity: 1; }
 body.happy .corner-links a { color: #000; }
@@ -186,12 +200,12 @@ body.happy .corner-links a { color: #000; }
   <div class="nav-links">
     <a href="/mission.html">Mission/Vision</a>
     <a href="/research.html">Research</a>
-    <a href="/publications.html">Publications and News</a>
+    <a href="/publications.html">Publications & News</a>
     <a href="/open.html">Open Science</a>
   </div>
 </nav>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN SCENE -->
 <div class="scene">
   <img src="/assets/images/big_human.png" class="silhouette" alt="Human silhouette">
 
