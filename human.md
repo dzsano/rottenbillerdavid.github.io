@@ -1,10 +1,10 @@
 ---
 layout: story
-title: Human Project 
+title: The Team 
 ---
 
 
 
-This will be a placeholder for the human project for now.
+Streamlined biologist-data scientist team.
 
 ![Human Project Image Image](/assets/images/human.png)
