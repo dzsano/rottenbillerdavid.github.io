@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ page.title }} | {{ site.title }}</title>
+
 <style>
 html, body {
   margin: 0;
@@ -35,29 +36,26 @@ nav {
   padding: 0 2rem;
   z-index: 10;
   transition: background-color 1.2s ease, color 1.2s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
-
 nav a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
+  margin-left: 1.2rem;
   font-weight: bold;
-  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  padding: 8px 14px;
   border: 2px solid currentColor;
   border-radius: 8px;
-  margin-left: 0.8rem;
-  font-size: 1rem;
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: all 0.3s ease;
 }
 nav a:hover {
-  background: currentColor;
+  background: #fff;
   color: #000;
 }
 nav .brand {
   font-weight: bold;
-  font-size: 1.1rem;
   border: 2px solid currentColor;
-  padding: 0.4rem 0.8rem;
+  padding: 8px 14px;
   border-radius: 8px;
 }
 
@@ -69,9 +67,10 @@ nav .brand {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 60px; /* push scene below navbar */
 }
 
+/* Silhouette */
 .silhouette {
   position: absolute;
   left: 8%;
@@ -81,6 +80,7 @@ nav .brand {
   z-index: 1;
 }
 
+/* Projection */
 .projection {
   position: absolute;
   right: 10%;
@@ -93,6 +93,7 @@ nav .brand {
 }
 .projection.happy { opacity: 0; }
 
+/* Brain under lock */
 .brain {
   position: absolute;
   top: 10%;
@@ -114,6 +115,7 @@ nav .brand {
 .brain img.happy { opacity: 0; z-index: 2; }
 .brain img.gloomy { z-index: 1; }
 
+/* Lock on top */
 .lock {
   position: absolute;
   top: 35%;
@@ -127,6 +129,7 @@ nav .brand {
 }
 .scene:hover .lock { opacity: 1; }
 
+/* Subtitle under brain */
 .subtitle {
   position: absolute;
   top: 68%;
@@ -139,11 +142,12 @@ nav .brand {
 
 /* ----------- CORNER LINKS ----------- */
 .corner-links {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  pointer-events: none;
   opacity: 0;
-  transition: opacity 1s ease;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 1.5s ease;
 }
 .corner-links a {
   position: absolute;
@@ -152,12 +156,15 @@ nav .brand {
   text-decoration: none;
   color: inherit;
   pointer-events: auto;
-  transition: color 0.6s ease;
+  transition: color 0.6s ease, transform 0.6s ease;
 }
-.corner-top-left { top: 30px; left: 30px; }
-.corner-top-right { top: 30px; right: 30px; }
-.corner-bottom-left { bottom: 30px; left: 30px; }
-.corner-bottom-right { bottom: 30px; right: 30px; }
+.corner-links a:hover {
+  transform: scale(1.05);
+}
+.corner-top-left { top: 80px; left: 40px; }
+.corner-top-right { top: 80px; right: 40px; }
+.corner-bottom-left { bottom: 40px; left: 40px; }
+.corner-bottom-right { bottom: 40px; right: 40px; }
 
 /* ----------- HAPPY MODE ----------- */
 body.happy {
@@ -178,9 +185,13 @@ body.happy .projection.happy,
 body.happy .brain img.happy { opacity: 1; }
 body.happy .subtitle { color: #000; }
 body.happy .lock { display: none; }
-body.happy .corner-links { opacity: 1; }
+body.happy .corner-links {
+  opacity: 1;
+  pointer-events: auto;
+}
 </style>
 </head>
+
 <body>
 
 <!-- Navbar -->
@@ -189,10 +200,10 @@ body.happy .corner-links { opacity: 1; }
   <div>
     <a href="/vision.html">Vision</a>
     <a href="/research.html">Research</a>
-    <a href="/patients.html">Patients, Teachers, Students</a>
+    <a href="/patients-teachers-students.html">Patients, Teachers, Students</a>
     <a href="/team.html">Team</a>
     <a href="/collaborations.html">Collaborations</a>
-    <a href="/news.html">News & Publications</a>
+    <a href="/news-publications.html">News & Publications</a>
     <a href="/contact.html">Contact</a>
   </div>
 </nav>
@@ -207,20 +218,21 @@ body.happy .corner-links { opacity: 1; }
   </div>
 
   <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
+
   <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
   <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
 
   <div class="subtitle" id="subtitle">
     Unlocking the Mesoscale Level of the Brain
   </div>
+</div>
 
-  <!-- Corner animal project links -->
-  <div class="corner-links">
-    <a href="/rat.html" class="corner-top-left">Rat Project</a>
-    <a href="/cat.html" class="corner-top-right">Cat Project</a>
-    <a href="/macaque.html" class="corner-bottom-left">Macaque Project</a>
-    <a href="/human.html" class="corner-bottom-right">Human Project</a>
-  </div>
+<!-- Corner project links -->
+<div class="corner-links" id="corner-links">
+  <a href="/mouse.html" class="corner-top-left">Mouse Project</a>
+  <a href="/rat.html" class="corner-top-right">Rat Project</a>
+  <a href="/monkey.html" class="corner-bottom-left">Monkey Project</a>
+  <a href="/human.html" class="corner-bottom-right">Human Project</a>
 </div>
 
 <script>
@@ -231,7 +243,7 @@ const brainGloomy = document.querySelector('.brain img.gloomy');
 const brainHappy = document.querySelector('.brain img.happy');
 const projGloomy = document.querySelector('.projection.gloomy');
 const projHappy = document.querySelector('.projection.happy');
-const cornerLinks = document.querySelector('.corner-links');
+const cornerLinks = document.getElementById('corner-links');
 let unlocked = false;
 
 lock.addEventListener('click', e => {
@@ -241,10 +253,12 @@ lock.addEventListener('click', e => {
 
   body.classList.add('happy');
 
+  // Fade lock out
   lock.style.transition = 'opacity 0.8s ease';
   lock.style.opacity = '0';
   setTimeout(() => { lock.style.display = 'none'; }, 800);
 
+  // Transition images
   brainGloomy.style.opacity = '0';
   projGloomy.style.opacity = '0';
   setTimeout(() => {
@@ -252,6 +266,13 @@ lock.addEventListener('click', e => {
     projHappy.style.opacity = '1';
   }, 300);
 
+  // Show corner links with a fade-in
+  setTimeout(() => {
+    cornerLinks.style.opacity = '1';
+    cornerLinks.style.pointerEvents = 'auto';
+  }, 1000);
+
+  // Change subtitle
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
 });
 </script>
