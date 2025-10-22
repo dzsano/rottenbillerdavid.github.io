@@ -39,9 +39,9 @@ nav {
 nav a {
   color: inherit;
   text-decoration: none;
-  margin-left: 1.5rem;
+  margin-left: 1rem;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: color 0.5s ease;
 }
 nav a:hover { text-decoration: underline; }
@@ -55,7 +55,7 @@ nav .brand { font-weight: bold; }
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 60px; /* push scene below navbar */
+  margin-top: 60px; /* push below navbar */
 }
 
 /* Silhouette */
@@ -103,7 +103,7 @@ nav .brand { font-weight: bold; }
 .brain img.happy { opacity: 0; z-index: 2; }
 .brain img.gloomy { z-index: 1; }
 
-/* Lock on top */
+/* Lock */
 .lock {
   position: absolute;
   top: 35%;
@@ -117,7 +117,7 @@ nav .brand { font-weight: bold; }
 }
 .scene:hover .lock { opacity: 1; }
 
-/* Subtitle under brain */
+/* Subtitle */
 .subtitle {
   position: absolute;
   top: 68%;
@@ -128,6 +128,28 @@ nav .brand { font-weight: bold; }
   transition: color 1s ease;
 }
 
+/* Corner Links */
+.corner-links {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.corner-links a {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  pointer-events: auto;
+  transition: color 0.6s ease;
+}
+.corner-top-left { top: 30px; left: 30px; }
+.corner-top-right { top: 30px; right: 30px; }
+.corner-bottom-left { bottom: 30px; left: 30px; }
+.corner-bottom-right { bottom: 30px; right: 30px; }
+
 /* Happy Mode */
 body.happy {
   background: #fff;
@@ -137,25 +159,29 @@ body.happy nav {
   background: #fff;
   color: #000;
 }
+body.happy .corner-links { opacity: 1; }
+body.happy .corner-links a { color: #000; }
 body.happy .projection.gloomy,
 body.happy .brain img.gloomy { opacity: 0; }
 body.happy .projection.happy,
 body.happy .brain img.happy { opacity: 1; }
 body.happy .subtitle { color: #000; }
 body.happy .lock { display: none; }
-
 </style>
 </head>
-<body>
 
+<body>
 <!-- Navbar -->
 <nav>
-  <div class="brand">HillierLab@HUN-REN TTK + PPKE-IT</div>
+  <div class="brand"><a href="/index.html">HillierLab@HUN-REN TTK + PPKE-IT</a></div>
   <div>
-    <a href="/mission.html">Mission/Vision</a>
+    <a href="/vision.html">Vision</a>
     <a href="/research.html">Research</a>
-    <a href="/publications.html">Publications & News</a>
-    <a href="/open.html">Open Science</a>
+    <a href="/patients.html">Patients, Teachers, Students</a>
+    <a href="/team.html">Team</a>
+    <a href="/collaborations.html">Collaborations</a>
+    <a href="/news.html">News & Publications</a>
+    <a href="/contact.html">Contact</a>
   </div>
 </nav>
 
@@ -173,8 +199,13 @@ body.happy .lock { display: none; }
   <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
   <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
 
-  <div class="subtitle" id="subtitle">
-    Unlocking the Mesoscale Level of the Brain
+  <div class="subtitle" id="subtitle">Unlocking the Mesoscale Level of the Brain</div>
+
+  <div class="corner-links">
+    <a href="/rat.html" class="corner-top-left">Rat Project</a>
+    <a href="/cat.html" class="corner-top-right">Cat Project</a>
+    <a href="/macaque.html" class="corner-bottom-left">Macaque Project</a>
+    <a href="/human.html" class="corner-bottom-right">Human Project</a>
   </div>
 </div>
 
@@ -194,13 +225,10 @@ lock.addEventListener('click', e => {
   unlocked = true;
 
   body.classList.add('happy');
-
-  // Fade lock out
   lock.style.transition = 'opacity 0.8s ease';
   lock.style.opacity = '0';
   setTimeout(() => { lock.style.display = 'none'; }, 800);
 
-  // Transition images
   brainGloomy.style.opacity = '0';
   projGloomy.style.opacity = '0';
   setTimeout(() => {
@@ -208,7 +236,6 @@ lock.addEventListener('click', e => {
     projHappy.style.opacity = '1';
   }, 300);
 
-  // Change subtitle
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
 });
 </script>
