@@ -156,9 +156,10 @@ nav .brand {
   text-decoration: none;
   color: inherit;
   pointer-events: auto;
-  transition: color 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.8s ease, color 0.6s ease, transform 0.6s ease;
   max-width: 260px;
   line-height: 1.3;
+  opacity: 0;
 }
 .corner-links a:hover {
   transform: scale(1.05);
@@ -187,10 +188,6 @@ body.happy .projection.happy,
 body.happy .brain img.happy { opacity: 1; }
 body.happy .subtitle { color: #000; }
 body.happy .lock { display: none; }
-body.happy .corner-links {
-  opacity: 1;
-  pointer-events: auto;
-}
 </style>
 </head>
 
@@ -246,6 +243,7 @@ const brainHappy = document.querySelector('.brain img.happy');
 const projGloomy = document.querySelector('.projection.gloomy');
 const projHappy = document.querySelector('.projection.happy');
 const cornerLinks = document.getElementById('corner-links');
+const cornerAnchors = cornerLinks.querySelectorAll('a');
 let unlocked = false;
 
 lock.addEventListener('click', e => {
@@ -268,11 +266,14 @@ lock.addEventListener('click', e => {
     projHappy.style.opacity = '1';
   }, 300);
 
-  // Show corner links with a fade-in
+  // Show corner links with staggered fade-in
   setTimeout(() => {
-    cornerLinks.style.opacity = '1';
     cornerLinks.style.pointerEvents = 'auto';
-  }, 1000);
+    cornerLinks.style.opacity = '1';
+    cornerAnchors.forEach((a, i) => {
+      setTimeout(() => { a.style.opacity = '1'; }, i * 500);
+    });
+  }, 800);
 
   // Change subtitle
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
