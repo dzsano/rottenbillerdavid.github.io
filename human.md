@@ -1,10 +1,8 @@
 ---
 layout: story
-title: The Team 
+title: Streamlined biologist-data scientist team
 ---
 
+Our approach combines experimental neuroscience with advanced data analytics...
 
-
-Streamlined biologist-data scientist team.
-
-![Human Project Image Image](/assets/images/human.png)
+![Human Project](/assets/images/human.png)
