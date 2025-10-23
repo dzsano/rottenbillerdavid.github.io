@@ -11,9 +11,11 @@ body {
   background: #fff;
   color: #000;
   padding-top: 80px;
+  text-align: center;
+  line-height: 1.6;
 }
 
-/* NAVBAR */
+/* -------- NAVBAR -------- */
 nav {
   position: fixed;
   top: 0; left: 0;
@@ -32,15 +34,10 @@ nav {
 nav .brand {
   font-weight: bold;
   font-size: 1.1rem;
-  transform: scale(1.1);
-  transform-origin: left center;
-  text-decoration: none;
-  color: inherit;
   padding: 8px 14px;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-
 nav .brand:hover {
   background: #000;
   color: #fff;
@@ -51,9 +48,10 @@ nav .brand:hover {
   justify-content: flex-end;
   align-items: center;
   gap: 1rem;
+  margin-right: 40px; /* prevents contact button overflow */
 }
 
-.nav-links a {
+nav a {
   color: inherit;
   text-decoration: none;
   font-weight: bold;
@@ -63,32 +61,32 @@ nav .brand:hover {
   transition: all 0.3s ease;
 }
 
-.nav-links a:hover {
+nav a:hover {
   background: #000;
   color: #fff;
-  border-radius: 4px;
 }
 
-/* CONTENT */
+/* -------- CONTENT -------- */
 main {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
   text-align: left;
 }
-main img {
+img {
   display: block;
-  margin: 2rem auto;
-  max-width: 80%;
+  max-width: 700px;
+  width: 90%;
   height: auto;
-  border-radius: 6px;
+  margin: 2rem auto;
+  border-radius: 10px;
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/index.html" class="brand">HillierLab@HUN-REN TTK + PPKE-IT</a>
+  <a href="/index.html" class="brand" style="font-size:1.1rem;">HillierLab</a>
   <div class="nav-links">
     <a href="/vision.html">Vision</a>
     <a href="/research.html">Research</a>
@@ -101,7 +99,11 @@ main img {
 </nav>
 
 <main>
+  <h1>{{ page.title }}</h1>
   {{ content }}
+  <p style="margin-top:2rem; text-align:center;">
+    <a href="/index.html" style="font-weight:bold; text-decoration:none; color:#000;">← Back to Homepage</a>
+  </p>
 </main>
 
 </body>
