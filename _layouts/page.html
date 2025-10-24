@@ -33,15 +33,15 @@ nav {
 
 nav .brand {
   font-weight: bold;
-  font-size: 1.25rem;
-  transform: scale(1.25);
-  transform-origin: left center;
+  font-size: 1.5rem; /* bigger text */
+  padding: 10px 18px; /* bigger button box */
+  border: 2px solid currentColor;
+  border-radius: 4px;
   text-decoration: none;
   color: inherit;
-  padding: 8px 14px;
-  border-radius: 4px;
   transition: all 0.3s ease;
 }
+
 
 nav .brand:hover {
   background: #000;
@@ -55,8 +55,11 @@ nav .brand:hover {
   gap: 1rem;
   flex-grow: 1;
   margin-left: 2rem;
-  padding-right: calc(1.5rem + 38px);
+  padding-right: 1.5rem;
   box-sizing: border-box;
+}
+.nav-links {
+  flex-wrap: nowrap;
 }
 
 .nav-links a {
