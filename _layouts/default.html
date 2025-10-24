@@ -50,7 +50,11 @@ nav .brand {
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-nav .brand:hover { background: #fff; color: #000; }
+
+nav .brand:hover {
+  background: #fff;
+  color: #000;
+}
 
 .nav-links {
   display: flex;
@@ -62,6 +66,7 @@ nav .brand:hover { background: #fff; color: #000; }
   padding-right: calc(1.5rem + 38px);
   box-sizing: border-box;
 }
+
 .nav-links a {
   color: inherit;
   text-decoration: none;
@@ -71,8 +76,14 @@ nav .brand:hover { background: #fff; color: #000; }
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-.nav-links a:hover { background: #fff; color: #000; }
+
+.nav-links a:hover {
+  background: #fff;
+  color: #000;
+}
+
 nav a:focus { outline: none !important; }
+
 
 /* ----------- SCENE ----------- */
 .scene {
@@ -84,6 +95,7 @@ nav a:focus { outline: none !important; }
   align-items: center;
   margin-top: 60px;
 }
+
 .silhouette {
   position: absolute;
   left: 8%;
@@ -92,6 +104,7 @@ nav a:focus { outline: none !important; }
   max-width: 800px;
   z-index: 1;
 }
+
 .projection {
   position: absolute;
   right: 10%;
@@ -103,6 +116,7 @@ nav a:focus { outline: none !important; }
   opacity: 1;
 }
 .projection.happy { opacity: 0; }
+
 .brain {
   position: absolute;
   top: 10%;
@@ -156,6 +170,7 @@ nav a:focus { outline: none !important; }
   z-index: 4;
   transition: opacity 1.5s ease;
 }
+
 .corner-links a {
   position: absolute;
   font-size: 0.9rem;
@@ -169,13 +184,17 @@ nav a:focus { outline: none !important; }
   opacity: 0;
   text-align: center;
 }
+
 .corner-links a:hover { transform: scale(1.05); }
+
 .corner-links a .corner-title {
   display: block;
   font-size: 1.6rem;
   font-weight: bold;
   line-height: 1.1;
 }
+
+/* Adjusted positions closer to center */
 .corner-top-left { top: 120px; left: 120px; text-align: left; }
 .corner-top-right { top: 120px; right: 120px; text-align: right; }
 .corner-bottom-left { bottom: 80px; left: 120px; text-align: left; }
@@ -191,15 +210,17 @@ body.happy nav {
   color: #000;
   border-bottom: 2px solid #000;
 }
-body.happy nav a:hover { background: #000; color: #fff; }
+body.happy nav a:hover {
+  background: #000;
+  color: #fff;
+}
 body.happy .projection.gloomy,
 body.happy .brain img.gloomy { opacity: 0; }
 body.happy .projection.happy,
 body.happy .brain img.happy { opacity: 1; }
 body.happy .subtitle { color: #000; }
 body.happy .lock { display: none; }
-body.happy .corner-links { opacity: 1; pointer-events: auto; }
-body.happy .corner-links a { opacity: 1; }
+
 </style>
 </head>
 
@@ -258,52 +279,42 @@ body.happy .corner-links a { opacity: 1; }
 <script>
 const lock = document.getElementById('lock');
 const body = document.body;
+const subtitle = document.getElementById('subtitle');
+const brainGloomy = document.querySelector('.brain img.gloomy');
+const brainHappy = document.querySelector('.brain img.happy');
+const projGloomy = document.querySelector('.projection.gloomy');
+const projHappy = document.querySelector('.projection.happy');
 const cornerLinks = document.getElementById('corner-links');
 const cornerAnchors = cornerLinks.querySelectorAll('a');
-const subtitle = document.getElementById('subtitle');
-
 let unlocked = false;
 
-/* Always start locked when landing on homepage */
-if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
-  localStorage.removeItem("hillierTheme");
-}
-
-/* If page was previously unlocked, stay happy */
-if (localStorage.getItem("hillierTheme") === "happy") {
-  body.classList.add('happy');
-  unlocked = true;
-  showCornerLinks();
-}
-
-/* Unlock action */
-lock?.addEventListener('click', e => {
+lock.addEventListener('click', e => {
   e.stopPropagation();
   if (unlocked) return;
   unlocked = true;
 
   body.classList.add('happy');
-  localStorage.setItem("hillierTheme", "happy");
 
+  lock.style.transition = 'opacity 0.8s ease';
   lock.style.opacity = '0';
   setTimeout(() => { lock.style.display = 'none'; }, 800);
 
-  showCornerLinks();
+  brainGloomy.style.opacity = '0';
+  projGloomy.style.opacity = '0';
+  setTimeout(() => {
+    brainHappy.style.opacity = '1';
+    projHappy.style.opacity = '1';
+  }, 300);
+
+  setTimeout(() => {
+    cornerLinks.style.pointerEvents = 'auto';
+    cornerLinks.style.opacity = '1';
+    cornerAnchors.forEach((a, i) => {
+      setTimeout(() => { a.style.opacity = '1'; }, i * 500);
+    });
+  }, 800);
+
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
-});
-
-/* Show animated corner links */
-function showCornerLinks() {
-  cornerLinks.style.pointerEvents = 'auto';
-  cornerLinks.style.opacity = '1';
-  cornerAnchors.forEach((a, i) => {
-    setTimeout(() => { a.style.opacity = '1'; }, i * 400);
-  });
-}
-
-/* Clicking the brand ALWAYS resets to gloomy start */
-document.querySelector('.brand').addEventListener('click', () => {
-  localStorage.removeItem("hillierTheme");
 });
 </script>
 
