@@ -256,63 +256,56 @@ body.happy .corner-links a { opacity: 1; }
 </div>
 
 <script>
-const body = document.body;
 const lock = document.getElementById('lock');
-const subtitle = document.getElementById('subtitle');
-const brainGloomy = document.querySelector('.brain img.gloomy');
-const brainHappy = document.querySelector('.brain img.happy');
-const projGloomy = document.querySelector('.projection.gloomy');
-const projHappy = document.querySelector('.projection.happy');
+const body = document.body;
 const cornerLinks = document.getElementById('corner-links');
 const cornerAnchors = cornerLinks.querySelectorAll('a');
+const subtitle = document.getElementById('subtitle');
 
 let unlocked = false;
 
-// Immediately apply happy mode if previously unlocked
-if (sessionStorage.getItem("splashUnlocked")) {
-  body.classList.add("happy");
-  brainGloomy.style.opacity = '0';
-  brainHappy.style.opacity = '1';
-  projGloomy.style.opacity = '0';
-  projHappy.style.opacity = '1';
-  cornerLinks.style.opacity = '1';
-  cornerLinks.style.pointerEvents = 'auto';
-  cornerAnchors.forEach(a => a.style.opacity = '1');
+/* Always start locked when landing on homepage */
+if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
+  localStorage.removeItem("hillierTheme");
 }
 
-// Unlock splash on lock click
-lock.addEventListener('click', e => {
+/* If page was previously unlocked, stay happy */
+if (localStorage.getItem("hillierTheme") === "happy") {
+  body.classList.add('happy');
+  unlocked = true;
+  showCornerLinks();
+}
+
+/* Unlock action */
+lock?.addEventListener('click', e => {
   e.stopPropagation();
   if (unlocked) return;
   unlocked = true;
 
   body.classList.add('happy');
-  sessionStorage.setItem("splashUnlocked", "true");
+  localStorage.setItem("hillierTheme", "happy");
 
-  lock.style.transition = 'opacity 0.8s ease';
   lock.style.opacity = '0';
   setTimeout(() => { lock.style.display = 'none'; }, 800);
 
-  brainGloomy.style.opacity = '0';
-  projGloomy.style.opacity = '0';
-  setTimeout(() => {
-    brainHappy.style.opacity = '1';
-    projHappy.style.opacity = '1';
-  }, 300);
-
-  cornerLinks.style.pointerEvents = 'auto';
-  cornerLinks.style.opacity = '1';
-  cornerAnchors.forEach((a, i) => {
-    setTimeout(() => { a.style.opacity = '1'; }, i * 500);
-  });
-
+  showCornerLinks();
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
 });
 
-// Reset happy mode when clicking HillierLab button
-document.querySelector('nav .brand').addEventListener('click', () => {
-  sessionStorage.removeItem("splashUnlocked");
+/* Show animated corner links */
+function showCornerLinks() {
+  cornerLinks.style.pointerEvents = 'auto';
+  cornerLinks.style.opacity = '1';
+  cornerAnchors.forEach((a, i) => {
+    setTimeout(() => { a.style.opacity = '1'; }, i * 400);
+  });
+}
+
+/* Clicking the brand ALWAYS resets to gloomy start */
+document.querySelector('.brand').addEventListener('click', () => {
+  localStorage.removeItem("hillierTheme");
 });
 </script>
+
 </body>
 </html>
