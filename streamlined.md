@@ -1,5 +1,5 @@
 ---
-layout: story
+layout: page
 title: Streamlined biologist-data scientist team
 ---
 
