@@ -1,4 +1,3 @@
-
 ---
 layout: story
 title: Animal models 
