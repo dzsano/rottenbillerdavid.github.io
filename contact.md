@@ -2,7 +2,6 @@
 layout: page
 title: Contact
 ---
-<h1>Contact</h1>
 <p>HILLIER, Dániel
 hillier.daniel [at] ttk.hu
 Visual Systems Neuroscience Research Group
