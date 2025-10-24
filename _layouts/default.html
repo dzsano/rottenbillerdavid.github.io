@@ -10,9 +10,15 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
   font-family: "Georgia", serif;
-  background: #fff;
-  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #000;
+  color: #e0e0e0;
+  transition: background-color 1.5s ease, color 1.5s ease;
 }
 
 /* ----------- NAVBAR ----------- */
@@ -22,88 +28,51 @@ nav {
   left: 0;
   width: 100%;
   height: 60px;
-  background: #fff;
-  color: #000;
+  background: #000;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2.5rem;
-  border-bottom: 2px solid #000;
+  padding: 0 1.8rem;
   z-index: 10;
+  border-bottom: 2px solid #fff;
+  transition: background-color 1.2s ease, color 1.2s ease, border-color 1.2s ease;
 }
-
-nav .brand {
-  font-weight: bold;
-  font-size: 1.25rem;
-  transform: scale(1.25);
-  transform-origin: left center;
-  text-decoration: none;
-  color: inherit;
-  padding: 8px 14px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-nav .brand:hover {
-  background: #000;
-  color: #fff;
-}
-
-.nav-links {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-  flex-grow: 1;
-  margin-left: 2rem;
-  padding-right: 38px; /* right padding to prevent bleeding */
-  box-sizing: border-box;
-}
-
-.nav-links a {
+nav a {
   color: inherit;
   text-decoration: none;
+  margin-left: 1rem;
   font-weight: bold;
   font-size: 0.95rem;
   padding: 8px 14px;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-
-.nav-links a:hover {
-  background: #000;
-  color: #fff;
-  border-radius: 4px;
+nav a:hover {
+  background: #fff;
+  color: #000;
+}
+nav .brand {
+  font-weight: bold;
+  font-size: 1.1rem;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+nav .brand:hover {
+  background: #fff;
+  color: #000;
 }
 
-/* ----------- CONTENT ----------- */
-main {
-  max-width: 900px;
-  margin: 80px auto 0 auto; /* push below navbar */
-  padding: 2rem;
-  text-align: left;
-}
-
-main img {
-  display: block;
-  max-width: 700px;
-  width: 90%;
-  margin: 2rem auto;
-  border-radius: 10px;
-}
-
-/* ----------- HOMEPAGE SCENE ----------- */
-{% if page.homepage %}
-body {
-  background: #000;
-  color: #e0e0e0;
-  overflow: hidden;
+/* Button spacing fix */
+nav div {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 0.8rem;
+  margin-right: 20px;
 }
 
+/* Scene, lock, brain, etc. — same as before */
 .scene {
   position: relative;
   flex-grow: 1;
@@ -140,7 +109,7 @@ body {
   top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60vw;
+  width: 60vw; /* +20% */
   max-width: 840px;
   z-index: 2;
 }
@@ -158,10 +127,10 @@ body {
 
 .lock {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 30%;
+  width: 21%; /* 30% smaller */
   opacity: 0;
   transition: opacity 0.6s ease;
   cursor: url('/assets/images/big_key2.png') 16 16, pointer;
@@ -179,6 +148,7 @@ body {
   transition: color 1s ease;
 }
 
+/* Corner links */
 .corner-links {
   position: fixed;
   inset: 0;
@@ -205,6 +175,7 @@ body {
 .corner-bottom-left { bottom: 40px; left: 40px; text-align: left; }
 .corner-bottom-right { bottom: 40px; right: 40px; text-align: right; }
 
+/* Happy mode */
 body.happy {
   background: #fff;
   color: #000;
@@ -214,27 +185,34 @@ body.happy nav {
   color: #000;
   border-bottom: 2px solid #000;
 }
-body.happy .nav-links a:hover,
-body.happy .brand:hover { background: #000; color: #fff; }
-{% endif %}
+body.happy nav a:hover {
+  background: #000;
+  color: #fff;
+}
+body.happy .projection.gloomy,
+body.happy .brain img.gloomy { opacity: 0; }
+body.happy .projection.happy,
+body.happy .brain img.happy { opacity: 1; }
+body.happy .subtitle { color: #000; }
+body.happy .lock { display: none; }
 </style>
 </head>
+
 <body>
 
 <nav>
   <a href="/index.html" class="brand">HillierLab</a>
-  <div class="nav-links">
-    <a href="/vision.md">Vision</a>
-    <a href="/research.md">Research</a>
-    <a href="/patients-teachers-students.md">Patients, Teachers, Students</a>
-    <a href="/team.md">Team</a>
-    <a href="/collaborations.md">Collaborations</a>
-    <a href="/news-publications.md">News & Publications</a>
-    <a href="/contact.md">Contact</a>
+  <div>
+    <a href="/vision">Vision</a>
+    <a href="/research">Research</a>
+    <a href="/patients-teachers-students">Patients, Teachers, Students</a>
+    <a href="/team">Team</a>
+    <a href="/collaborations">Collaborations</a>
+    <a href="/news-publications">News & Publications</a>
+    <a href="/contact">Contact</a>
   </div>
 </nav>
 
-{% if page.homepage %}
 <div class="scene">
   <img src="/assets/images/big_human.png" class="silhouette" alt="Human silhouette">
 
@@ -243,7 +221,7 @@ body.happy .brand:hover { background: #000; color: #fff; }
     <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
   </div>
 
-  <img src="/assets/images/lock_blue.png" class="lock" id="lock" alt="Lock">
+  <img src="/assets/images/big_lock.png" class="lock" id="lock" alt="Lock">
 
   <img src="/assets/images/big_scary.png" class="projection gloomy" alt="Scary projection">
   <img src="/assets/images/big_happy.png" class="projection happy" alt="Happy projection">
@@ -254,10 +232,10 @@ body.happy .brand:hover { background: #000; color: #fff; }
 </div>
 
 <div class="corner-links" id="corner-links">
-  <a href="/biotechnology.md" class="corner-top-left">Biotechnology providing cure not symptom treatment</a>
-  <a href="/animal_models.md" class="corner-top-right">Animal models that facilitate idea-&gt;therapy (translation)</a>
-  <a href="/healing.md" class="corner-bottom-left">Healing brain circuits in adults</a>
-  <a href="/streamlined.md" class="corner-bottom-right">Streamlined biologist-data scientist team</a>
+  <a href="/mouse" class="corner-top-left">Biotechnology providing cure not symptom treatment</a>
+  <a href="/rat" class="corner-top-right">Animal models that facilitate idea-&gt;therapy (translation)</a>
+  <a href="/monkey" class="corner-bottom-left">Healing brain circuits in adults</a>
+  <a href="/human" class="corner-bottom-right">Streamlined biologist-data scientist team</a>
 </div>
 
 <script>
@@ -301,12 +279,5 @@ lock.addEventListener('click', e => {
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
 });
 </script>
-{% endif %}
-
-<main>
-  <h1>{{ page.title }}</h1>
-  {{ content }}
-</main>
-
 </body>
 </html>
