@@ -1,5 +1,5 @@
 ---
-layout: story
+layout: page
 title: Cat Project 
 ---
 
