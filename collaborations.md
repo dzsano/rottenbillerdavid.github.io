@@ -2,7 +2,7 @@
 layout: page
 title: Collaborations
 ---
-<h1>Collaborations</h1>
+#<h1>Collaborations</h1>
 <p>HUN-REN TTK 
 ERA-NET: Amblyopia, imaging techniques, behavioural methodologies,
 Institute of Molecular and Clinical Ophthalmology Basel (IOB): functional ultrasound imaging
