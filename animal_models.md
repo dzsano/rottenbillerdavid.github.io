@@ -1,6 +1,6 @@
 ---
 layout: page
-/* title: Animal models */
+title: Animal models
 ---
 
 
