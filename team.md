@@ -2,7 +2,6 @@
 layout: page
 title: Team
 ---
-<h1>Team</h1>
 <p>Dániel HILLIER, PhD + portrait
 Head of the group
 Vision neuroscience, gene therapy, image processing, microscopy, machine vision
