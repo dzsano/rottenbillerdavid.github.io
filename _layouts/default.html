@@ -84,7 +84,6 @@ nav .brand:hover {
 
 nav a:focus { outline: none !important; }
 
-
 /* ----------- SCENE ----------- */
 .scene {
   position: relative;
@@ -170,35 +169,29 @@ nav a:focus { outline: none !important; }
   z-index: 4;
   transition: opacity 1.5s ease;
 }
-
 .corner-links a {
   position: absolute;
-  font-size: 0.9rem;
-  font-weight: normal;
+  font-weight: bold;
   text-decoration: none;
   color: inherit;
   pointer-events: auto;
   transition: opacity 0.8s ease, color 0.6s ease, transform 0.6s ease;
   max-width: 260px;
-  line-height: 1.2;
   opacity: 0;
-  text-align: center;
+  line-height: 1.2;
 }
-
+.corner-links a span:first-child {
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
 .corner-links a:hover { transform: scale(1.05); }
 
-.corner-links a .corner-title {
-  display: block;
-  font-size: 1.6rem;
-  font-weight: bold;
-  line-height: 1.1;
-}
-
-/* Adjusted positions closer to center */
-.corner-top-left { top: 120px; left: 120px; text-align: left; }
-.corner-top-right { top: 120px; right: 120px; text-align: right; }
-.corner-bottom-left { bottom: 80px; left: 120px; text-align: left; }
-.corner-bottom-right { bottom: 80px; right: 120px; text-align: right; }
+/* Adjust positions toward center */
+.corner-top-left { top: 120px; left: 100px; text-align: left; }
+.corner-top-right { top: 120px; right: 100px; text-align: right; }
+.corner-bottom-left { bottom: 120px; left: 100px; text-align: left; }
+.corner-bottom-right { bottom: 120px; right: 100px; text-align: right; }
 
 /* ----------- HAPPY MODE ----------- */
 body.happy {
@@ -258,22 +251,10 @@ body.happy .lock { display: none; }
 </div>
 
 <div class="corner-links" id="corner-links">
-  <a href="/biotechnology" class="corner-top-left">
-    <span class="corner-title">BIOTECHNOLOGY</span><br>
-    providing cure not symptom treatment
-  </a>
-  <a href="/animal_models" class="corner-top-right">
-    <span class="corner-title">ANIMAL MODELS</span><br>
-    from idea to therapy
-  </a>
-  <a href="/healing" class="corner-bottom-left">
-    <span class="corner-title">HEALING</span><br>
-    brain circuits in adults
-  </a>
-  <a href="/streamlined" class="corner-bottom-right">
-    <span class="corner-title">STREAMLINED</span><br>
-    biologist-data scientist team
-  </a>
+  <a href="/biotechnology" class="corner-top-left"><span>BIOTECHNOLOGY</span>providing cure not symptom treatment</a>
+  <a href="/animal_models" class="corner-top-right"><span>ANIMAL MODELS</span>from idea → therapy</a>
+  <a href="/healing" class="corner-bottom-left"><span>HEALING</span>brain circuits in adults</a>
+  <a href="/streamlined" class="corner-bottom-right"><span>STREAMLINED</span>biologist-data scientist team</a>
 </div>
 
 <script>
@@ -288,12 +269,21 @@ const cornerLinks = document.getElementById('corner-links');
 const cornerAnchors = cornerLinks.querySelectorAll('a');
 let unlocked = false;
 
+// Only show gloomy/dark on full reload
+if (!sessionStorage.getItem("splashUnlocked")) {
+  body.classList.remove("happy");
+} else {
+  body.classList.add("happy");
+}
+
+// Unlock splash
 lock.addEventListener('click', e => {
   e.stopPropagation();
   if (unlocked) return;
   unlocked = true;
 
   body.classList.add('happy');
+  sessionStorage.setItem("splashUnlocked", "true");
 
   lock.style.transition = 'opacity 0.8s ease';
   lock.style.opacity = '0';
@@ -316,7 +306,11 @@ lock.addEventListener('click', e => {
 
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
 });
-</script>
 
+// Reset happy mode when clicking HillierLab button
+document.querySelector('nav .brand').addEventListener('click', () => {
+  sessionStorage.removeItem("splashUnlocked");
+});
+</script>
 </body>
 </html>
