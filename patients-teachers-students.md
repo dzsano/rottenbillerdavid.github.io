@@ -2,7 +2,6 @@
 layout: page
 title: Patients
 ---
-<h1>Patients</h1>
 <p>The human brain is built from billions of specialized cells called neurons that form trillions of connections known as synapses. These connections are not random; they are organized into complex circuits and specialized regions that govern everything from our senses and movements to our thoughts and emotions.
 This complex architecture is sculpted throughout development, beginning with a massive overproduction of connections in early life. Subsequently, a crucial process of synaptic pruning eliminates weaker or unused synapses while strengthening active ones, making the brain's networks more efficient. This refinement is guided by experience and occurs during specific "windows of plasticity," when the brain is exceptionally responsive to learning and organizing its circuits. Understanding this lifelong process of growth and adaptation is essential for grasping both the foundations of healthy cognition and the origins of neurological and psychiatric disorders.
  
