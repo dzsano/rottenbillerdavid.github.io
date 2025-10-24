@@ -8,7 +8,7 @@ The child’s brain is remarkably flexible – during development it constantly 
 Our research aims to understand how this “closed” state could be reopened and proper brain function restored in a targeted way. The key may lie in the brain’s mid-level – mesoscale – organizational units. These small, interconnected groups of nerve cells form a bridge between the cellular level and larger brain networks, playing a decisive role in how neural connections are formed and stabilized.
 If we can target and influence these units, we may be able to restore the adult brain’s ability to retune faulty connections – opening new possibilities for the treatment of developmental and mental disorders.
 
-*Italic* Explore our current research project/projects:
+*Explore our current research project/projects:*
 
 # Understanding "Lazy Eye": How the Brain Predicts What We See
 
