@@ -13,9 +13,10 @@ body {
   color: #000;
   padding-top: 80px;
   line-height: 1.6;
+  text-align: center;
 }
 
-/* -------- NAVBAR -------- */
+/* ----------- NAVBAR (IDENTICAL TO HOMEPAGE) ----------- */
 nav {
   position: fixed;
   top: 0; left: 0;
@@ -33,15 +34,15 @@ nav {
 
 nav .brand {
   font-weight: bold;
-  font-size: 1.5rem; /* bigger text */
-  padding: 10px 18px; /* bigger button box */
-  border: 2px solid currentColor;
-  border-radius: 4px;
+  font-size: 1.25rem;
+  transform: scale(1.25);
+  transform-origin: left center;
   text-decoration: none;
   color: inherit;
+  padding: 8px 14px;
+  border-radius: 4px;
   transition: all 0.3s ease;
 }
-
 
 nav .brand:hover {
   background: #000;
@@ -55,11 +56,8 @@ nav .brand:hover {
   gap: 1rem;
   flex-grow: 1;
   margin-left: 2rem;
-  padding-right: 1.5rem;
+  padding-right: calc(1.5rem + 38px);
   box-sizing: border-box;
-}
-.nav-links {
-  flex-wrap: nowrap;
 }
 
 .nav-links a {
@@ -77,6 +75,8 @@ nav .brand:hover {
   color: #fff;
 }
 
+nav a:focus { outline: none !important; }
+
 /* -------- CONTENT -------- */
 main {
   max-width: 900px;
@@ -84,7 +84,6 @@ main {
   padding: 2rem;
   text-align: left;
 }
-
 main img {
   display: block;
   max-width: 700px;
@@ -92,7 +91,6 @@ main img {
   margin: 2rem auto;
   border-radius: 10px;
 }
-
 </style>
 </head>
 
@@ -100,7 +98,7 @@ main img {
 
 <nav>
   <a href="/index.html" class="brand">HillierLab</a>
-    <div class="nav-links">
+  <div class="nav-links">
     <a href="/vision.html">Vision</a>
     <a href="/research.html">Research</a>
     <a href="/patients-teachers-students.html">Patients, Teachers, Students</a>
