@@ -105,6 +105,20 @@ nav a:focus { outline: none !important; }
   z-index: 1;
 }
 
+.silhouette img {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  transition: opacity 1.2s ease;
+}
+
+.silhouette img.happy { opacity: 0; }
+body.happy .silhouette img.gloomy { opacity: 0; }
+body.happy .silhouette img.happy { opacity: 1; }
+
+
 .projection {
   position: absolute;
   right: 7%;
@@ -240,7 +254,10 @@ body.happy .lock { display: none; }
 </nav>
 
 <div class="scene">
-  <img src="/assets/images/happy_window.png" class="silhouette" alt="Human silhouette">
+  <div class="silhouette">
+    <img src="/assets/images/gloomy_window.png" class="gloomy" alt="Gloomy window">
+    <img src="/assets/images/happy_window.png" class="happy" alt="Happy window">
+  </div>
 
   <div class="brain" id="brain">
     <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
