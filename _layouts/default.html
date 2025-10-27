@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ page.title }} | {{ site.title }}</title>
 
+<!-- 🪄 Prepaint theme application to prevent dark→light flash -->
+<script>
+(function () {
+  if (sessionStorage.getItem('hl_unlocked') === '1') {
+    document.documentElement.classList.add('happy', 'no-anim');
+  }
+})();
+</script>
+
 <style>
 html, body {
   margin: 0;
@@ -37,7 +46,6 @@ nav {
   border-bottom: 2px solid #fff;
   transition: background-color 1.2s ease, color 1.2s ease, border-color 1.2s ease;
 }
-
 nav .brand {
   font-weight: bold;
   font-size: 1.25rem;
@@ -49,7 +57,6 @@ nav .brand {
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-
 nav .brand:hover { background: #fff; color: #000; }
 
 .nav-links {
@@ -62,7 +69,6 @@ nav .brand:hover { background: #fff; color: #000; }
   padding-right: calc(1.5rem + 38px);
   box-sizing: border-box;
 }
-
 .nav-links a {
   color: inherit;
   text-decoration: none;
@@ -72,7 +78,6 @@ nav .brand:hover { background: #fff; color: #000; }
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-
 .nav-links a:hover { background: #fff; color: #000; }
 nav a:focus { outline: none !important; }
 
@@ -86,7 +91,6 @@ nav a:focus { outline: none !important; }
   align-items: center;
   margin-top: 60px;
 }
-
 .silhouette {
   position: absolute;
   left: 4%;
@@ -99,8 +103,7 @@ nav a:focus { outline: none !important; }
   position: absolute;
   width: 100%;
   height: auto;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   transition: opacity 1.2s ease;
 }
 .silhouette img.happy { opacity: 0; }
@@ -185,12 +188,7 @@ body.happy .silhouette img.happy { opacity: 1; }
   text-align: center;
 }
 .corner-links a:hover { transform: scale(1.05); }
-.corner-links a .corner-title {
-  display: block;
-  font-size: 1.6rem;
-  font-weight: bold;
-  line-height: 1.1;
-}
+.corner-links a .corner-title { display: block; font-size: 1.6rem; font-weight: bold; line-height: 1.1; }
 .corner-top-left { top: 120px; left: 120px; text-align: left; }
 .corner-top-right { top: 120px; right: 120px; text-align: right; }
 .corner-bottom-left { bottom: 80px; left: 120px; text-align: left; }
@@ -204,6 +202,9 @@ body.happy .projection.gloomy, body.happy .brain img.gloomy { opacity: 0; }
 body.happy .projection.happy,  body.happy .brain img.happy { opacity: 1; }
 body.happy .subtitle { color: #000; }
 body.happy .lock { display: none; }
+
+/* 🚫 Disable transitions before first paint (avoid flicker) */
+html.no-anim, html.no-anim * { transition: none !important; }
 </style>
 </head>
 
@@ -223,119 +224,102 @@ body.happy .lock { display: none; }
 
 <div class="scene">
   <div class="silhouette">
-    <img src="/assets/images/gloomy_window.png" class="gloomy" alt="Gloomy window" />
-    <img src="/assets/images/happy_window.png"  class="happy"  alt="Happy window" />
+    <img src="/assets/images/gloomy_window.png" class="gloomy" alt="Gloomy window">
+    <img src="/assets/images/happy_window.png" class="happy" alt="Happy window">
   </div>
 
   <div class="brain" id="brain">
-    <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain" />
-    <img src="/assets/images/h_brain.png" class="happy"  alt="Happy brain" />
+    <img src="/assets/images/g_brain.png" class="gloomy" alt="Gloomy brain">
+    <img src="/assets/images/h_brain.png" class="happy" alt="Happy brain">
   </div>
 
-  <img src="/assets/images/lock_blue.png" class="lock" id="lock" alt="Lock" />
+  <img src="/assets/images/lock_blue.png" class="lock" id="lock" alt="Lock">
 
-  <img src="/assets/images/gloomy_scenery.png" class="projection gloomy" alt="Scary projection" />
-  <img src="/assets/images/happy_scenery.png"  class="projection happy"  alt="Happy projection" />
+  <img src="/assets/images/gloomy_scenery.png" class="projection gloomy" alt="Scary projection">
+  <img src="/assets/images/happy_scenery.png" class="projection happy" alt="Happy projection">
 
-  <div class="subtitle" id="subtitle">Unlocking the Mesoscale Level of the Brain</div>
+  <div class="subtitle" id="subtitle">
+    Unlocking the Mesoscale Level of the Brain
+  </div>
 </div>
 
 <div class="corner-links" id="corner-links">
   <a href="/biotechnology" class="corner-top-left">
-    <span class="corner-title">BIOTECHNOLOGY</span><br />
+    <span class="corner-title">BIOTECHNOLOGY</span><br>
     providing cure not symptom treatment
   </a>
   <a href="/animal_models" class="corner-top-right">
-    <span class="corner-title">ANIMAL MODELS</span><br />
+    <span class="corner-title">ANIMAL MODELS</span><br>
     from idea to therapy
   </a>
   <a href="/healing" class="corner-bottom-left">
-    <span class="corner-title">HEALING</span><br />
+    <span class="corner-title">HEALING</span><br>
     brain circuits in adults
   </a>
   <a href="/streamlined" class="corner-bottom-right">
-    <span class="corner-title">STREAMLINED</span><br />
+    <span class="corner-title">STREAMLINED</span><br>
     biologist-data scientist team
   </a>
 </div>
 
 <script>
-/* ---------- THEME PERSISTENCE (per-tab, resets on reload) ---------- */
-(function () {
-  // If this load is a *reload*, clear the unlocked flag so we reset to dark intro.
-  try {
-    var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
-    var navType = navEntries && navEntries[0] ? navEntries[0].type : (performance.navigation ? (performance.navigation.type === 1 ? 'reload' : '') : '');
-    if (navType === 'reload') sessionStorage.removeItem('hl_unlocked');
-  } catch(e){ /* no-op */ }
+const lock = document.getElementById('lock');
+const body = document.body;
+const subtitle = document.getElementById('subtitle');
+const brainGloomy = document.querySelector('.brain img.gloomy');
+const brainHappy = document.querySelector('.brain img.happy');
+const projGloomy = document.querySelector('.projection.gloomy');
+const projHappy = document.querySelector('.projection.happy');
+const cornerLinks = document.getElementById('corner-links');
+const cornerAnchors = cornerLinks.querySelectorAll('a');
+let unlocked = sessionStorage.getItem('hl_unlocked') === '1';
 
-  var body        = document.body;
-  var lock        = document.getElementById('lock');
-  var subtitle    = document.getElementById('subtitle');
-  var brainGloomy = document.querySelector('.brain img.gloomy');
-  var brainHappy  = document.querySelector('.brain img.happy');
-  var projGloomy  = document.querySelector('.projection.gloomy');
-  var projHappy   = document.querySelector('.projection.happy');
-  var cornerLinks = document.getElementById('corner-links');
-  var cornerAnchors = cornerLinks ? cornerLinks.querySelectorAll('a') : [];
+function applyUnlockedImmediate() {
+  body.classList.add('happy');
+  lock.style.display = 'none';
+  brainGloomy.style.opacity = '0';
+  projGloomy.style.opacity = '0';
+  brainHappy.style.opacity = '1';
+  projHappy.style.opacity = '1';
+  cornerLinks.style.pointerEvents = 'auto';
+  cornerLinks.style.opacity = '1';
+  cornerAnchors.forEach(a => (a.style.opacity = '1'));
+  subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
+}
 
-  var unlocked = sessionStorage.getItem('hl_unlocked') === '1';
+if (unlocked) applyUnlockedImmediate();
 
-  function applyUnlockedImmediate() {
-    body.classList.add('happy');
-    if (lock) { lock.style.display = 'none'; }
-    if (brainGloomy) brainGloomy.style.opacity = '0';
-    if (projGloomy)  projGloomy.style.opacity  = '0';
-    if (brainHappy)  brainHappy.style.opacity  = '1';
-    if (projHappy)   projHappy.style.opacity   = '1';
-    if (cornerLinks) {
-      cornerLinks.style.pointerEvents = 'auto';
-      cornerLinks.style.opacity = '1';
-      cornerAnchors.forEach(function(a){ a.style.opacity = '1'; });
-    }
-    if (subtitle) subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
-  }
+lock.addEventListener('click', e => {
+  e.stopPropagation();
+  if (unlocked) return;
+  unlocked = true;
+  sessionStorage.setItem('hl_unlocked', '1');
+  body.classList.add('happy');
 
-  if (unlocked) {
-    // We arrived here after unlocking somewhere in this tab: render happy immediately.
-    applyUnlockedImmediate();
-  }
+  lock.style.transition = 'opacity 0.8s ease';
+  lock.style.opacity = '0';
+  setTimeout(() => { lock.style.display = 'none'; }, 800);
 
-  // Wire up the lock click to unlock + persist for this tab (until a reload).
-  if (lock) {
-    lock.addEventListener('click', function (e) {
-      e.stopPropagation();
-      if (sessionStorage.getItem('hl_unlocked') === '1') return;
+  brainGloomy.style.opacity = '0';
+  projGloomy.style.opacity = '0';
+  setTimeout(() => {
+    brainHappy.style.opacity = '1';
+    projHappy.style.opacity = '1';
+  }, 300);
 
-      sessionStorage.setItem('hl_unlocked', '1');
-      body.classList.add('happy');
+  setTimeout(() => {
+    cornerLinks.style.pointerEvents = 'auto';
+    cornerLinks.style.opacity = '1';
+    cornerAnchors.forEach((a, i) => setTimeout(() => (a.style.opacity = '1'), i * 500));
+  }, 800);
 
-      // Animate the transition (your original timing)
-      lock.style.transition = 'opacity 0.8s ease';
-      lock.style.opacity = '0';
-      setTimeout(function(){ lock.style.display = 'none'; }, 800);
+  subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
+});
 
-      if (brainGloomy) brainGloomy.style.opacity = '0';
-      if (projGloomy)  projGloomy.style.opacity  = '0';
-      setTimeout(function() {
-        if (brainHappy) brainHappy.style.opacity = '1';
-        if (projHappy)  projHappy.style.opacity  = '1';
-      }, 300);
-
-      setTimeout(function() {
-        if (cornerLinks) {
-          cornerLinks.style.pointerEvents = 'auto';
-          cornerLinks.style.opacity = '1';
-          cornerAnchors.forEach(function(a, i) {
-            setTimeout(function(){ a.style.opacity = '1'; }, i * 500);
-          });
-        }
-      }, 800);
-
-      if (subtitle) subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
-    });
-  }
-})();
+// Re-enable transitions after first paint
+requestAnimationFrame(() => {
+  document.documentElement.classList.remove('no-anim');
+});
 </script>
 
 </body>
