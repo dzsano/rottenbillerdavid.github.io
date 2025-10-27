@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Contact
+title: Contacts
 ---
 <p>HILLIER, Dániel
 hillier.daniel [at] ttk.hu
