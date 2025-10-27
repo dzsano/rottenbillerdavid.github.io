@@ -5,8 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ page.title }} | {{ site.title }}</title>
 
+<!-- 🪄 Prepaint theme application -->
+<script>
+(function () {
+  if (sessionStorage.getItem('hl_unlocked') === '1') {
+    document.documentElement.classList.add('happy', 'no-anim');
+  }
+})();
+</script>
+
 <style>
-/* Default: DARK until unlocked */
 body {
   font-family: "Georgia", serif;
   margin: 0;
@@ -18,7 +26,7 @@ body {
   transition: background-color 1.2s ease, color 1.2s ease;
 }
 
-/* ----------- NAVBAR (matches homepage) ----------- */
+/* ----------- NAVBAR ----------- */
 nav {
   position: fixed;
   top: 0; left: 0;
@@ -34,7 +42,6 @@ nav {
   z-index: 10;
   transition: background-color 1.2s ease, color 1.2s ease, border-color 1.2s ease;
 }
-
 nav .brand {
   font-weight: bold;
   font-size: 1.25rem;
@@ -68,7 +75,6 @@ nav .brand:hover { background: #fff; color: #000; }
   transition: all 0.3s ease;
 }
 .nav-links a:hover { background: #fff; color: #000; }
-nav a:focus { outline: none !important; }
 
 /* -------- CONTENT -------- */
 main {
@@ -85,7 +91,7 @@ main img {
   border-radius: 10px;
 }
 
-/* ----------- HAPPY (LIGHT) THEME OVERRIDES ----------- */
+/* ----------- HAPPY MODE ----------- */
 body.happy {
   background: #fff;
   color: #000;
@@ -100,6 +106,9 @@ body.happy .nav-links a:hover {
   background: #000;
   color: #fff;
 }
+
+/* 🚫 Disable transitions before first paint */
+html.no-anim, html.no-anim * { transition: none !important; }
 </style>
 </head>
 
@@ -123,18 +132,15 @@ body.happy .nav-links a:hover {
 </main>
 
 <script>
-/* ---------- THEME PERSISTENCE (same logic as homepage) ---------- */
-(function () {
-  try {
-    var navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
-    var navType = navEntries && navEntries[0] ? navEntries[0].type : (performance.navigation ? (performance.navigation.type === 1 ? 'reload' : '') : '');
-    if (navType === 'reload') sessionStorage.removeItem('hl_unlocked');
-  } catch(e){ /* no-op */ }
+// Apply happy class if unlocked
+if (sessionStorage.getItem('hl_unlocked') === '1') {
+  document.body.classList.add('happy');
+}
 
-  if (sessionStorage.getItem('hl_unlocked') === '1') {
-    document.body.classList.add('happy');
-  }
-})();
+// Re-enable transitions after paint
+requestAnimationFrame(() => {
+  document.documentElement.classList.remove('no-anim');
+});
 </script>
 
 </body>
