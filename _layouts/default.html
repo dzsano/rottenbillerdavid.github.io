@@ -5,21 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ page.title }} | {{ site.title }}</title>
 
-<!-- Preload happy-state images to avoid late swaps -->
+<!-- Preload happy-state images -->
 <link rel="preload" as="image" href="/assets/images/h_brain.png" />
 <link rel="preload" as="image" href="/assets/images/happy_window.png" />
 <link rel="preload" as="image" href="/assets/images/happy_scenery.png" />
 
-<!-- 🪄 Prepaint: set theme and block paint for one frame to avoid flicker -->
+<!-- 🪄 Prepaint: set theme and block paint for one frame -->
 <script>
 (function () {
-  // Always add a short-lived paint block; remove next frame.
   document.documentElement.classList.add('prep');
-
-  // If unlocked, set happy immediately + disable transitions for first paint
   if (sessionStorage.getItem('hl_unlocked') === '1') {
     document.documentElement.classList.add('happy', 'no-anim');
-    // Inline fallback in case CSS hasn’t parsed yet
     document.documentElement.style.background = '#fff';
     document.documentElement.style.color = '#000';
   } else {
@@ -30,7 +26,6 @@
 </script>
 
 <style>
-/* Base */
 html, body {
   margin: 0; height: 100%; width: 100%;
   overflow: hidden;
@@ -88,9 +83,27 @@ html.happy .silhouette img.happy  { opacity: 1; }
 .subtitle { position: absolute; top: 68%; width: 100%; text-align: center; font-size: 1.2rem; color: #e0e0e0; transition: color 1s ease; }
 
 /* ----------- CORNER LINKS ----------- */
-.corner-links { position: fixed; inset: 0; opacity: 0; pointer-events: none; z-index: 4; transition: opacity 1.5s ease; }
-.corner-links a { position: absolute; font-size: 0.9rem; font-weight: normal; text-decoration: none; color: inherit; pointer-events: auto;
-  transition: opacity 0.8s ease, color 0.6s ease, transform 0.6s ease; max-width: 260px; line-height: 1.2; opacity: 0; text-align: center; }
+.corner-links {
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none; /* 🔒 Not clickable until unlocked */
+  z-index: 4;
+  transition: opacity 1.5s ease;
+}
+.corner-links a {
+  position: absolute;
+  font-size: 0.9rem;
+  font-weight: normal;
+  text-decoration: none;
+  color: inherit;
+  pointer-events: none; /* 🔒 Disable pointer events on links initially */
+  transition: opacity 0.8s ease, color 0.6s ease, transform 0.6s ease;
+  max-width: 260px;
+  line-height: 1.2;
+  opacity: 0;
+  text-align: center;
+}
 .corner-links a:hover { transform: scale(1.05); }
 .corner-links a .corner-title { display: block; font-size: 1.6rem; font-weight: bold; line-height: 1.1; }
 .corner-top-left { top: 120px; left: 120px; text-align: left; }
@@ -106,6 +119,12 @@ html.happy .projection.gloomy, html.happy .brain img.gloomy { opacity: 0; }
 html.happy .projection.happy,  html.happy .brain img.happy  { opacity: 1; }
 html.happy .subtitle { color: #000; }
 html.happy .lock { display: none; }
+
+/* 🩹 Make corner links clickable only after unlocking */
+html.happy .corner-links,
+html.happy .corner-links a {
+  pointer-events: auto;
+}
 </style>
 </head>
 
@@ -170,7 +189,6 @@ const projHappy   = document.querySelector('.projection.happy');
 const subtitle    = document.getElementById('subtitle');
 const cornerLinks = document.getElementById('corner-links');
 const cornerAnchors = cornerLinks.querySelectorAll('a');
-
 let unlocked = sessionStorage.getItem('hl_unlocked') === '1';
 
 function applyUnlockedImmediate() {
@@ -180,7 +198,6 @@ function applyUnlockedImmediate() {
   projGloomy.style.opacity  = '0';
   brainHappy.style.opacity  = '1';
   projHappy.style.opacity   = '1';
-  cornerLinks.style.pointerEvents = 'auto';
   cornerLinks.style.opacity = '1';
   cornerAnchors.forEach(a => a.style.opacity = '1');
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
@@ -192,7 +209,6 @@ lock.addEventListener('click', e => {
   e.stopPropagation();
   if (unlocked) return;
   unlocked = true;
-
   sessionStorage.setItem('hl_unlocked', '1');
   document.documentElement.classList.add('happy');
 
@@ -208,18 +224,18 @@ lock.addEventListener('click', e => {
   }, 300);
 
   setTimeout(() => {
-    cornerLinks.style.pointerEvents = 'auto';
     cornerLinks.style.opacity = '1';
-    cornerAnchors.forEach((a, i) => setTimeout(() => (a.style.opacity = '1'), i * 500));
+    cornerAnchors.forEach((a, i) =>
+      setTimeout(() => (a.style.opacity = '1'), i * 500)
+    );
   }, 800);
 
   subtitle.textContent = 'Bridging the Gap Between Molecules and Behavior';
 });
 
-// Reveal after first frame (removes paint block and re-enables transitions if any)
+// Reveal after first frame
 requestAnimationFrame(() => {
   document.documentElement.classList.remove('prep', 'no-anim');
-  // Cleanup inline fallback
   document.documentElement.style.background = '';
   document.documentElement.style.color = '';
 });
