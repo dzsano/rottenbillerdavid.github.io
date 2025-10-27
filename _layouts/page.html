@@ -5,110 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ page.title }} | {{ site.title }}</title>
 
-<!-- 🪄 Prepaint theme application -->
+<!-- Preload happy-state image (optional) -->
+<link rel="preload" as="image" href="/assets/images/h_brain.png" />
+
+<!-- 🪄 Prepaint: set theme and block paint for one frame -->
 <script>
 (function () {
+  document.documentElement.classList.add('prep');
   if (sessionStorage.getItem('hl_unlocked') === '1') {
     document.documentElement.classList.add('happy', 'no-anim');
+    document.documentElement.style.background = '#fff';
+    document.documentElement.style.color = '#000';
+  } else {
+    document.documentElement.style.background = '#000';
+    document.documentElement.style.color = '#e0e0e0';
   }
 })();
 </script>
 
 <style>
+/* Base (dark default) */
+html, body {
+  background: #000; color: #e0e0e0;
+}
 body {
   font-family: "Georgia", serif;
   margin: 0;
-  background: #000;
-  color: #e0e0e0;
   padding-top: 80px;
   line-height: 1.6;
   text-align: center;
   transition: background-color 1.2s ease, color 1.2s ease;
 }
 
+/* Hide body for the very first frame to prevent flashes */
+html.prep body { visibility: hidden; }
+/* Disable transitions on first paint if we arrived unlocked */
+html.no-anim, html.no-anim * { transition: none !important; }
+
 /* ----------- NAVBAR ----------- */
 nav {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 60px;
-  background: #000;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2.5rem;
-  border-bottom: 2px solid #fff;
-  z-index: 10;
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 60px;
+  background: #000; color: #fff;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 2.5rem; border-bottom: 2px solid #fff; z-index: 10;
   transition: background-color 1.2s ease, color 1.2s ease, border-color 1.2s ease;
 }
-nav .brand {
-  font-weight: bold;
-  font-size: 1.25rem;
-  transform: scale(1.25);
-  transform-origin: left center;
-  text-decoration: none;
-  color: inherit;
-  padding: 8px 14px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
+nav .brand { font-weight: bold; font-size: 1.25rem; transform: scale(1.25); transform-origin: left center;
+  text-decoration: none; color: inherit; padding: 8px 14px; border-radius: 4px; transition: all 0.3s ease; }
 nav .brand:hover { background: #fff; color: #000; }
 
-.nav-links {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-  flex-grow: 1;
-  margin-left: 2rem;
-  padding-right: calc(1.5rem + 38px);
-  box-sizing: border-box;
-}
-.nav-links a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 0.95rem;
-  padding: 8px 14px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
+.nav-links { display: flex; justify-content: flex-end; align-items: center; gap: 1rem;
+  flex-grow: 1; margin-left: 2rem; padding-right: calc(1.5rem + 38px); box-sizing: border-box; }
+.nav-links a { color: inherit; text-decoration: none; font-weight: bold; font-size: 0.95rem;
+  padding: 8px 14px; border-radius: 4px; transition: all 0.3s ease; }
 .nav-links a:hover { background: #fff; color: #000; }
 
 /* -------- CONTENT -------- */
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: left;
-}
-main img {
-  display: block;
-  max-width: 700px;
-  width: 90%;
-  margin: 2rem auto;
-  border-radius: 10px;
-}
+main { max-width: 900px; margin: 0 auto; padding: 2rem; text-align: left; }
+main img { display: block; max-width: 700px; width: 90%; margin: 2rem auto; border-radius: 10px; }
 
-/* ----------- HAPPY MODE ----------- */
-body.happy {
-  background: #fff;
-  color: #000;
-}
-body.happy nav {
-  background: #fff;
-  color: #000;
-  border-bottom: 2px solid #000;
-}
-body.happy nav .brand:hover,
-body.happy .nav-links a:hover {
-  background: #000;
-  color: #fff;
-}
-
-/* 🚫 Disable transitions before first paint */
-html.no-anim, html.no-anim * { transition: none !important; }
+/* ----------- HAPPY (LIGHT) THEME ----------- */
+html.happy, html.happy body { background: #fff; color: #000; }
+html.happy nav { background: #fff; color: #000; border-bottom: 2px solid #000; }
+html.happy nav .brand:hover,
+html.happy .nav-links a:hover { background: #000; color: #fff; }
 </style>
 </head>
 
@@ -132,14 +93,16 @@ html.no-anim, html.no-anim * { transition: none !important; }
 </main>
 
 <script>
-// Apply happy class if unlocked
+// If unlocked, ensure body picks up any body-specific styles (not strictly needed anymore)
 if (sessionStorage.getItem('hl_unlocked') === '1') {
-  document.body.classList.add('happy');
+  document.documentElement.classList.add('happy');
 }
 
-// Re-enable transitions after paint
+// Reveal after first frame (removes paint block + no-anim)
 requestAnimationFrame(() => {
-  document.documentElement.classList.remove('no-anim');
+  document.documentElement.classList.remove('prep', 'no-anim');
+  document.documentElement.style.background = '';
+  document.documentElement.style.color = '';
 });
 </script>
 
