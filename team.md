@@ -19,3 +19,10 @@ title: Meet the Team
   </div>
 </div>
 
+<div style="display: flex; align-items: center; margin-bottom: 2em;">
+  <img src="/assets/images/Fanni.jpg" alt="Member Name" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-right: 20px;">
+  <div>
+    <h3>Fanni Soos</h3>
+    <p>"As a laboratory assistant in our group, I take part in processing and analyzing experimental samples in the anatomy lab."</p>
+  </div>
+</div>
