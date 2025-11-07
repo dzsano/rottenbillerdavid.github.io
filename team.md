@@ -42,3 +42,11 @@ title: Meet the Team
     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
   </div>
 </div>
+
+<div style="display: flex; align-items: center; margin-bottom: 2em; flex-direction: row-reverse;">
+  <img src="/assets/images/Doma.JPG" alt="Barna Kovacs" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-left: 20px;">
+  <div>
+    <h3>Domonkos Horvath</h3>
+    <p>"I hold an MSc in Electronic and Computer Engineering from Pázmány Péter Catholic University and a PhD in Theoretical Medical Sciences from Semmelweis University. My research centers on chronic imaging experiments in large-brained animals, primarily under anesthesia. In our lab, I plan, organize, and conduct these experiments collaboratively with our team, advancing our understanding of brain function through precise and systematic application of chronic imaging approaches."</p>
+  </div>
+</div>
