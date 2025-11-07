@@ -28,7 +28,7 @@ title: Meet the Team
 </div>
 
 <div style="display: flex; align-items: center; margin-bottom: 2em; flex-direction: row-reverse;">
-  <img src="/assets/images/MAriela.JPG" alt="Barna Kovacs" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-left: 20px;">
+  <img src="/assets/images/Mariela.JPG" alt="Barna Kovacs" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-left: 20px;">
   <div>
     <h3>Mariela Talavera Munoz</h3>
     <p>"I am Mariela Talavera, bacherlor student of biomedical engineering in Universidad Autónoma de Madrid. I am interested in medical imaging and prothesis design. I like playing piano and doing sports."</p>
