@@ -3,5 +3,5 @@ layout: page
 title: Team
 ---
 <p>
-  Edited text
+  Your text comes here
 </p>
