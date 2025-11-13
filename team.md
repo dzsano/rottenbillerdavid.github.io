@@ -19,7 +19,6 @@ title: Meet the Team
     </div>
 
    
-  </div>
 
 
 <div style="display: flex; align-items: center; margin-bottom: 2em;">
