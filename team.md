@@ -62,7 +62,7 @@ title: Meet the Team
   <img src="/assets/images/Baneen.jpg" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
   <div>
     <h3>Baneen Maamra</h3>
-    <p>PhD in Neurophysiology, University of Debrecen</p>
+    <p>"I hve a PhD in Neurophysiology, which I have obtained at the University of Debrecen"</p>
   </div>
 </div>
 
