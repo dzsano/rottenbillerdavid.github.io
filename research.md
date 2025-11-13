@@ -4,11 +4,11 @@ title: Research
 ---
 <p>
   Our research is driven by the pursuit of new methods to answer fundamental questions in neuroscience. We focus on developing and applying pioneering technologies—from high-resolution functional ultrasound imaging to next-generation gene therapies—to overcome long-standing barriers in the field. This approach allows us to investigate the brain at multiple scales, aiming to bridge the gap between understanding its basic design principles and creating effective clinical applications.
-</p>
 
-#Biotechnology#
 
-<p>
+# Biotechnology
+
+
 Our work develops next-generation biotechnologies aimed at repairing, rather than compensating for, disrupted brain function. We focus on advancing molecular and gene delivery systems, neuromodulation technologies, and translational safety frameworks that enable durable and precise interventions in the adult brain.
 A central challenge for brain-targeted therapies lies in achieving long-term efficacy and safety across species with complex neural architectures. To address this, we are refining viral vector systems for stable gene delivery and minimal immune activation, and developing robust assays to assess treatment compatibility—such as improved neutralizing antibody detection for AAV-based therapies.
 Because rodents do not fully recapitulate the organization or cognitive capacity of the human brain, we extend our studies to large-brained species, including cats and non-human primates. These models provide the necessary bridge between fundamental discovery and clinically viable approaches, guiding the development of biotechnologies capable of truly restorative outcomes.
