@@ -6,7 +6,7 @@ title: Research
   Our research is driven by the pursuit of new methods to answer fundamental questions in neuroscience. We focus on developing and applying pioneering technologies—from high-resolution functional ultrasound imaging to next-generation gene therapies—to overcome long-standing barriers in the field. This approach allows us to investigate the brain at multiple scales, aiming to bridge the gap between understanding its basic design principles and creating effective clinical applications.
 </p>
 
-#Biotechnology
+#Biotechnology#
 
 <p>
 Our work develops next-generation biotechnologies aimed at repairing, rather than compensating for, disrupted brain function. We focus on advancing molecular and gene delivery systems, neuromodulation technologies, and translational safety frameworks that enable durable and precise interventions in the adult brain.
