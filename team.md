@@ -3,9 +3,7 @@ layout: page
 title: Meet the Team
 ---
 
-<!-- Streamlined CTA (card-style with image on the right) -->
 <style>
-  /* Hover invert matches your site’s dark/light behavior */
   html:not(.happy) .cta-streamlined-card:hover { background: #fff; color: #000; }
   html.happy .cta-streamlined-card:hover { background: #000; color: #fff; }
 </style>
@@ -17,15 +15,12 @@ title: Meet the Team
               margin-bottom: 2rem; transition: background-color .3s ease, color .3s ease, transform .08s ease;">
     <div style="text-align: left;">
       <h3 style="margin: 0 0 .25rem 0;">Streamlined</h3>
-      <p style="margin: 0; opacity: .85;">Tools & resources for a smoother workflow</p>
+      <p style="margin: 0; opacity: .85;">Biologist-data scientist team</p>
     </div>
 
-    <!-- Replace the src with your PNG once uploaded -->
-    <img src="/assets/images/streamlined.png" alt="Streamlined"
-         style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%;
-                object-fit: cover; margin-left: 20px;">
+   
   </div>
-</a>
+
 
 <div style="display: flex; align-items: center; margin-bottom: 2em;">
   <img src="/assets/images/Kinga.JPEG" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
