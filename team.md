@@ -3,12 +3,29 @@ layout: page
 title: Meet the Team
 ---
 
-<div id="streamlined-link" style="text-align: right; margin-bottom: 1rem;">
-  <a href="/streamlined.html"
-     style="font-weight: bold; text-decoration: none; color: inherit; border: 2px solid currentColor; padding: 6px 12px; border-radius: 4px; transition: all 0.3s ease;">
-    Streamlined
-  </a>
-</div>
+<!-- Streamlined CTA (card-style with image on the right) -->
+<style>
+  /* Hover invert matches your site’s dark/light behavior */
+  html:not(.happy) .cta-streamlined-card:hover { background: #fff; color: #000; }
+  html.happy .cta-streamlined-card:hover { background: #000; color: #fff; }
+</style>
+
+<a href="/streamlined.html" class="cta-streamlined" style="text-decoration: none; color: inherit;">
+  <div class="cta-streamlined-card"
+       style="display: flex; align-items: center; justify-content: space-between; gap: 20px;
+              border: 2px solid currentColor; border-radius: 12px; padding: 14px 18px;
+              margin-bottom: 2rem; transition: background-color .3s ease, color .3s ease, transform .08s ease;">
+    <div style="text-align: left;">
+      <h3 style="margin: 0 0 .25rem 0;">Streamlined</h3>
+      <p style="margin: 0; opacity: .85;">Tools & resources for a smoother workflow</p>
+    </div>
+
+    <!-- Replace the src with your PNG once uploaded -->
+    <img src="/assets/images/streamlined.png" alt="Streamlined"
+         style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%;
+                object-fit: cover; margin-left: 20px;">
+  </div>
+</a>
 
 <div style="display: flex; align-items: center; margin-bottom: 2em;">
   <img src="/assets/images/Kinga.JPEG" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
