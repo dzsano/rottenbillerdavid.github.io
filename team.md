@@ -22,7 +22,6 @@ title: Meet the Team
          style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%;
                 object-fit: cover; margin-left: 20px;">
   </div>
-</a>
 
    
 
