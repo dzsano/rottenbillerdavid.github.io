@@ -4,24 +4,27 @@ title: Meet the Team
 ---
 
 <style>
-  html:not(.happy) .cta-streamlined-card:hover { background: #fff; color: #000; }
-  html.happy .cta-streamlined-card:hover { background: #000; color: #fff; }
+  html:not(.happy) .cta-streamlined-card:hover { background:#fff; color:#000; }
+  html.happy .cta-streamlined-card:hover { background:#000; color:#fff; }
 </style>
 
-<a href="/streamlined.html" class="cta-streamlined" style="text-decoration: none; color: inherit;">
+<!-- Streamlined card: full clickable area -->
+<a href="/streamlined.html"
+   style="text-decoration:none; color:inherit; display:block; margin-bottom:2rem;">
   <div class="cta-streamlined-card"
-       style="display: flex; align-items: center; justify-content: space-between; gap: 20px;
-              border: 2px solid currentColor; border-radius: 12px; padding: 14px 18px;
-              margin-bottom: 2rem; transition: background-color .3s ease, color .3s ease, transform .08s ease;">
-    <div style="text-align: left;">
-      <h3 style="margin: 0 0 .25rem 0;">Streamlined</h3>
-      <p style="margin: 0; opacity: .85;">Tools & resources for a smoother workflow</p>
+       style="display:flex; align-items:center; justify-content:space-between; gap:20px;
+              border:2px solid currentColor; border-radius:12px; padding:14px 18px;
+              transition:background-color .3s ease, color .3s ease;">
+    <div style="text-align:left;">
+      <h3 style="margin:0 0 .25rem 0;">Streamlined</h3>
+      <p style="margin:0; opacity:.85;">Biologist-data scientist team</p>
     </div>
 
     <img src="/assets/images/streamlined.png" alt="Streamlined"
-         style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%;
-                object-fit: cover; margin-left: 20px;">
+         style="width:150px; height:150px; aspect-ratio:1/1; border-radius:50%;
+                object-fit:cover; margin-left:20px;">
   </div>
+</a>
 
    
 
@@ -62,7 +65,7 @@ title: Meet the Team
   <img src="/assets/images/Baneen.jpg" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
   <div>
     <h3>Baneen Maamra</h3>
-    <p>"I hve a PhD in Neurophysiology, which I have obtained at the University of Debrecen"</p>
+    <p>"My name is Baneen Maamra. I have a PhD in Neurophysiology, which I have obtained at the University of Debrecen"</p>
   </div>
 </div>
 
