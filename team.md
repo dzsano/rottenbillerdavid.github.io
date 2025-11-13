@@ -6,15 +6,26 @@ title: Meet the Team
 <style>
   html:not(.happy) .cta-streamlined-card:hover { background:#fff; color:#000; }
   html.happy .cta-streamlined-card:hover { background:#000; color:#fff; }
+
+  .cta-wrap { position: relative; margin-bottom: 2rem; }
+  .cta-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    /* ensure it’s clickable across the whole card */
+    display: block;
+  }
+  .cta-streamlined-card {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    border: 2px solid currentColor; border-radius: 12px; padding: 14px 18px;
+    transition: background-color .3s ease, color .3s ease;
+    text-decoration: none; color: inherit;
+  }
 </style>
 
-<!-- Streamlined card: full clickable area -->
-<a href="/streamlined.html"
-   style="text-decoration:none; color:inherit; display:block; margin-bottom:2rem;">
-  <div class="cta-streamlined-card"
-       style="display:flex; align-items:center; justify-content:space-between; gap:20px;
-              border:2px solid currentColor; border-radius:12px; padding:14px 18px;
-              transition:background-color .3s ease, color .3s ease;">
+<div class="cta-wrap">
+  <a class="cta-overlay" href="/streamlined.html" aria-label="Open Streamlined"></a>
+
+  <div class="cta-streamlined-card">
     <div style="text-align:left;">
       <h3 style="margin:0 0 .25rem 0;">Streamlined</h3>
       <p style="margin:0; opacity:.85;">Biologist-data scientist team</p>
@@ -24,7 +35,7 @@ title: Meet the Team
          style="width:150px; height:150px; aspect-ratio:1/1; border-radius:50%;
                 object-fit:cover; margin-left:20px;">
   </div>
-</a>
+</div>
 
    
 
