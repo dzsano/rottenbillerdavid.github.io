@@ -2,7 +2,7 @@
 layout: page
 title: Research
 ---
-<p>
+
   Our research is driven by the pursuit of new methods to answer fundamental questions in neuroscience. We focus on developing and applying pioneering technologies—from high-resolution functional ultrasound imaging to next-generation gene therapies—to overcome long-standing barriers in the field. This approach allows us to investigate the brain at multiple scales, aiming to bridge the gap between understanding its basic design principles and creating effective clinical applications.
 
 
@@ -23,4 +23,4 @@ Enhancing the safety and effectiveness of gene therapy relies on accurately iden
 
 Genetically targeting specific brain cells is a powerful tool for understanding neural circuits and modeling diseases, but applying these techniques safely and effectively over the long term, especially in animals other than mice, remains a major hurdle. The use of gene therapy vectors, which are essential for this work, is often complicated by the body's immune response and inconsistent gene activity, limiting the reliability and duration of experiments. This research directly tackles this challenge by systematically searching for an optimal delivery method. Through extensive long-term studies involving optical imaging and immune monitoring, an optimized gene therapy approach was identified that ensures stable, long-lasting gene expression for brain imaging while significantly reducing the immune reaction. This breakthrough provides a much-needed method for safe and stable genetic access to the brain, paving the way for more advanced and reliable long-term studies of brain function.
 
-</p>
+
