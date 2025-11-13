@@ -28,7 +28,7 @@ title: Meet the Team
   <div class="cta-streamlined-card">
     <div style="text-align:left; flex:1;">
       <h3 style="margin:0 0 .25rem 0;">Streamlined</h3>
-      <p style="margin:0; opacity:.85;">Tools & resources for a smoother workflow</p>
+      <p style="margin:0; opacity:.85;">Biologist-data scientist team</p>
     </div>
 
     <img src="/assets/images/streamlined.png" alt="Streamlined"
