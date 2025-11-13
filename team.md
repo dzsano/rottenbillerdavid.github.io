@@ -15,8 +15,14 @@ title: Meet the Team
               margin-bottom: 2rem; transition: background-color .3s ease, color .3s ease, transform .08s ease;">
     <div style="text-align: left;">
       <h3 style="margin: 0 0 .25rem 0;">Streamlined</h3>
-      <p style="margin: 0; opacity: .85;">Biologist-data scientist team</p>
+      <p style="margin: 0; opacity: .85;">Tools & resources for a smoother workflow</p>
     </div>
+
+    <img src="/assets/images/streamlined.png" alt="Streamlined"
+         style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%;
+                object-fit: cover; margin-left: 20px;">
+  </div>
+</a>
 
    
 
