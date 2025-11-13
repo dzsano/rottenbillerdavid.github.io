@@ -3,6 +3,13 @@ layout: page
 title: Meet the Team
 ---
 
+<div id="streamlined-link" style="text-align: right; margin-bottom: 1rem;">
+  <a href="/streamlined.html"
+     style="font-weight: bold; text-decoration: none; color: inherit; border: 2px solid currentColor; padding: 6px 12px; border-radius: 4px; transition: all 0.3s ease;">
+    Streamlined
+  </a>
+</div>
+
 <div style="display: flex; align-items: center; margin-bottom: 2em;">
   <img src="/assets/images/Kinga.JPEG" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
   <div>
