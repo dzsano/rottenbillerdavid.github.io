@@ -90,7 +90,14 @@ title: Meet the Team
   <img src="/assets/images/Abel.jpg" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
   <div>
     <h3>Abel Petik</h3>
-    <p>"I'm the main developer and functional imaging data analyst of the group. My goal is to understand the computations of the visual cortex on the mesoscale.
-"</p>
+    <p>"I'm the main developer and functional imaging data analyst of the group. My goal is to understand the computations of the visual cortex on the mesoscale."</p>
+  </div>
+</div>
+
+<div style="display: flex; align-items: center; margin-bottom: 2em; flex-direction: row-reverse;">
+  <img src="/assets/images/Virag.JPG" alt="Barna Kovacs" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-left: 20px;">
+  <div>
+    <h3>Virag Gyorgy</h3>
+    <p>"I am a biotechnologist (MSc) working in the anatomy laboratory, where I focus on tissue sample processing, histological preparation, and experimental data analysis. My work also includes contributing to animal care and welfare."</p>
   </div>
 </div>
