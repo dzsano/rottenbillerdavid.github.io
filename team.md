@@ -101,3 +101,11 @@ title: Meet the Team
     <p>"I am a biotechnologist (MSc) working in the anatomy laboratory, where I focus on tissue sample processing, histological preparation, and experimental data analysis. My work also includes contributing to animal care and welfare."</p>
   </div>
 </div>
+
+<div style="display: flex; align-items: center; margin-bottom: 2em;">
+  <img src="/assets/images/Gabi.JPG" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
+  <div>
+    <h3>Gabriella Trieb</h3>
+    <p>"I enjoy everything related to nature and movement, and love being creative, whether through physical objects or more conceptual forms of expression."</p>
+  </div>
+</div>
