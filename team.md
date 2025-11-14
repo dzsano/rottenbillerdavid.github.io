@@ -85,3 +85,12 @@ title: Meet the Team
     <p>"I hold an MSc in Electronic and Computer Engineering from Pázmány Péter Catholic University and a PhD in Theoretical Medical Sciences from Semmelweis University. My research centers on chronic imaging experiments in large-brained animals, primarily under anesthesia. In our lab, I plan, organize, and conduct these experiments collaboratively with our team, advancing our understanding of brain function through precise and systematic application of chronic imaging approaches."</p>
   </div>
 </div>
+
+<div style="display: flex; align-items: center; margin-bottom: 2em;">
+  <img src="/assets/images/Abel.jpg" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
+  <div>
+    <h3>Abel Petik</h3>
+    <p>"I'm the main developer and functional imaging data analyst of the group. My goal is to understand the computations of the visual cortex on the mesoscale.
+"</p>
+  </div>
+</div>
