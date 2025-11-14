@@ -106,6 +106,6 @@ title: Meet the Team
   <img src="/assets/images/Gabi.jpg" alt="Member Name" style="width: 150px; height: 150px; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; margin-right: 20px;">
   <div>
     <h3>Gabriella Trieb</h3>
-    <p>"I enjoy everything related to nature and movement, and love being creative, whether through physical objects or more conceptual forms of expression."</p>
+    <p>"I work as a research assistant on human EEG experiments and also support HR tasks within the group. I enjoy working with people and helping participants feel informed and comfortable throughout the studies. Our measurements focus on an eye condition I also have, which makes it especially exciting to see how the research gradually improves our understanding of it."</p>
   </div>
 </div>
